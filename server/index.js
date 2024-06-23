@@ -4,6 +4,7 @@ const cors = require('cors');
 const userRouter = require('./routes/user.route.js');
 const authRouter = require('./routes/auth.route.js');
 const profileRouter = require('./routes/profile.route.js');
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,10 +23,7 @@ app.use('/server/auth', authRouter);
 app.use('/server', profileRouter);
 
 // MongoDB Connection
-mongoose.connect('mongodb+srv://fincelerate:HSvj1997@fincelerate.66cvkhp.mongodb.net/?retryWrites=true&w=majority&appName=Fincelerate', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('DB connected');
   })
