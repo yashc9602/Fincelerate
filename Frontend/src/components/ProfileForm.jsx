@@ -22,7 +22,7 @@ export default function ProfileForm() {
 
   useEffect(() => {
     // Fetch user profile data if available and set form data
-    fetch('http://localhost:3000/server/profile', {
+    fetch('https://fincelerate.onrender.com/server/profile', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export default function ProfileForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3000/server/profile', {
+    fetch('https://fincelerate.onrender.com/server/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

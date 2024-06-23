@@ -7,7 +7,7 @@ const ProfileView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3000/server/profile', {
+    fetch('https://fincelerate.onrender.com/server/profile', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
