@@ -11,7 +11,7 @@ export default function Home() {
 
               <div class="sm:text-center lg:py-12 lg:text-left xl:py-24">
                 <h1 class="mb-8 text-4xl font-bold text-black sm:text-5xl md:mb-12 md:text-6xl">
-                  Accelerateeee your Financials . . .{" "}
+                  Accelerate your Financials . . .{" "}
                 </h1>
 
                 <div class="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start">

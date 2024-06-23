@@ -13,6 +13,11 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json()); // for parsing application/json
 
+const corsOptions = {
+  origin: 'https://fincelerate-1.onrender.com/', // Replace with your frontend URL
+  optionsSuccessStatus: 200,
+};
+
 // Routes
 app.get('/', (req, res) => {
   res.send('Hello World!');
