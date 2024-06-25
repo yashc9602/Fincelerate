@@ -36,7 +36,7 @@ export default function Signin() {
           localStorage.setItem('token', data.token);
           localStorage.setItem('user', JSON.stringify(data.user));
           dispatch(loginSuccess(data.user, data.token));
-          navigate('/profile');
+          navigate('/');
         } else {
           console.error('Authentication failed', data);
         }

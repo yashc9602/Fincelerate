@@ -27,6 +27,15 @@ app.use('/server/user', userRouter);
 app.use('/server/auth', authRouter);
 app.use('/server', profileRouter);
 
+app.get('/server/posts', async (req, res) => {
+  try {
+    const response = await axios.get('https://mintcream-chamois-554629.hostingersite.com/wp-json/wp/v2/posts');
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).send(error.toString());
+  }
+});
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {

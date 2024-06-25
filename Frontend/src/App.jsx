@@ -32,6 +32,7 @@ import MediaPage from './components/EYourself';
 import AboutUs1 from './components/About1';
 import Carousel from './components/Carousel';
 import SphereCarousel from './components/ImageCarousel';
+import Blog from './components/Blogs';
 
 function App() {
   const dispatch = useDispatch();
@@ -75,6 +76,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs1 />} />
         <Route path="/carousel" element={<Carousel />} />
         <Route path="/imagecarousel" element={<SphereCarousel />} />
+        <Route path="/blogs" element={<Blog />} />
 
 
         
