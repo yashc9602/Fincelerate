@@ -13,21 +13,25 @@ import ProfileForm from './components/ProfileForm'; // Import ProfileForm
 import store from './redux/store';
 import { loginSuccess } from './redux/authReducer';
 import ProfileView from './components/ProfileView';
-import SIPCalculator from './components/SipCalculator';
-import LumpsumCalculator from './components/LumpsumCalculator';
-import StepUpSIPCalculator from './components/StepUpSIPCalculator';
-import SWPCalculator from './components/SWPCalculator';
-import STPCalculator from './components/STPCalculator';
-import BuyDreamCar from './components/DreamCar';
-import DreamHouseGoal from './components/DreamHouse';
-import ChildEducationGoal from './components/ChildPlan';
-import ChildMarriageGoal from './components/ChildMarriage';
-import BuildYourCorpus from './components/Corpus';
-import PlanYourGoal from './components/PlanYourGoal';
-import PlanYourRetirement from './components/RetirementCalc';
+import SIPCalculator from './components/Calculators/SipCalculator';
+import LumpsumCalculator from './components/Calculators/LumpsumCalculator';
+import StepUpSIPCalculator from './components/Calculators/StepUpSIPCalculator';
+import SWPCalculator from './components/Calculators/SWPCalculator';
+import STPCalculator from './components/Calculators/STPCalculator';
+import BuyDreamCar from './components/Goals/DreamCar';
+import DreamHouseGoal from './components/Goals/DreamHouse';
+import ChildEducationGoal from './components/Goals/ChildPlan';
+import ChildMarriageGoal from './components/Goals/ChildMarriage';
+import BuildYourCorpus from './components/Goals/Corpus';
+import PlanYourGoal from './components/Goals/PlanYourGoal';
+import PlanYourRetirement from './components/Goals/RetirementCalc';
 import GoalsPage from './components/Goals';
-import PlanYourChildEducation from './components/ChildEducation';
-import CalculatorsPage from './components/Calculators';
+import PlanYourChildEducation from './components/Goals/ChildEducation';
+import CalculatorsPage from './components/Calculators/Calculators';
+import MediaPage from './components/EYourself';
+import AboutUs1 from './components/About1';
+import Carousel from './components/Carousel';
+import SphereCarousel from './components/ImageCarousel';
 
 function App() {
   const dispatch = useDispatch();
@@ -67,6 +71,11 @@ function App() {
         <Route path="/goals" element={<GoalsPage />} />
         <Route path="/childeducation" element={<PlanYourChildEducation />} />
         <Route path="/calculators" element={<CalculatorsPage />} />
+        <Route path="/eyourself" element={<MediaPage />} />
+        <Route path="/aboutus" element={<AboutUs1 />} />
+        <Route path="/carousel" element={<Carousel />} />
+        <Route path="/imagecarousel" element={<SphereCarousel />} />
+
 
         
       </Routes>

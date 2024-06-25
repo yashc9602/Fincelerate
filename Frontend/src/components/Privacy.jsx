@@ -1,6 +1,8 @@
 import React from 'react';
+import useScrollToTop from './useScrollToTop';
 
 export default function Privacy() {
+  useScrollToTop();
   return (
     <div className="bg-gray-100 p-6">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded shadow-md">

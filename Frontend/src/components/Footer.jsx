@@ -59,7 +59,7 @@ export default function Footer() {
                 </div>
 
                 <div>
-                  <a href="#" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Faq</a>
+                  <a href="#" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Frequently Asked Questions</a>
                 </div>
               </nav>
             </div>
@@ -111,9 +111,7 @@ export default function Footer() {
                   <Link to="/calculators" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Calculators</Link>
                 </div>
 
-                <div>
-                  <a href="#" className="transition duration-100 hover:text-gray-300 active:text-gray-400">+91-9611248691</a>
-                </div>
+
               </nav>
             </div>
           </div>

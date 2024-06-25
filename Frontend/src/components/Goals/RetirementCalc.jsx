@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import React, { useState, useEffect } from 'react';
+import { Bar } from 'react-chartjs-2';
+import 'chart.js/auto';
 import 'tailwindcss/tailwind.css';
 
 const PlanYourRetirement = () => {
@@ -27,7 +28,7 @@ const PlanYourRetirement = () => {
 
     return {
       corpusNeeded: corpusNeeded.toFixed(2),
-      SIPAmount: SIPAmount.toFixed(2),
+      SIPAmount: useInvestmentAmount ? SIPAmount.toFixed(2) : investmentAmount.toFixed(2),
       yearsToInvest: yearsToInvest.toFixed(1),
     };
   };
@@ -35,17 +36,38 @@ const PlanYourRetirement = () => {
   const results = calculateRetirement();
 
   const chartData = {
-    labels: Array.from({ length: results.yearsToInvest * 12 }, (_, i) => i + 1),
+    labels: Array.from({ length: results.yearsToInvest }, (_, i) => `Year ${i + 1}`),
     datasets: [
       {
-        label: 'Retirement Corpus Growth',
-        data: Array.from({ length: results.yearsToInvest * 12 }, (_, i) => 
-          useInvestmentAmount 
-            ? results.SIPAmount * (Math.pow(1 + (expectedGrowthRate / 100) / 12, i + 1) - 1) / ((expectedGrowthRate / 100) / 12) 
-            : results.corpusNeeded * Math.pow(1 + (expectedGrowthRate / 100) / 12, i + 1)),
+        label: 'Invested Amount',
+        data: Array.from({ length: results.yearsToInvest }, (_, i) => {
+          if (useInvestmentAmount) {
+            const year = i + 1;
+            return results.SIPAmount * 12 * year;
+          } else {
+            return results.corpusNeeded;
+          }
+        }),
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        stack: 'combined',
+      },
+      {
+        label: 'Gains',
+        data: Array.from({ length: results.yearsToInvest }, (_, i) => {
+          const year = i + 1;
+          if (useInvestmentAmount) {
+            const investedAmount = results.SIPAmount * 12 * year;
+            return (investedAmount * Math.pow(1 + (expectedGrowthRate / 100), year)) - investedAmount;
+          } else {
+            return results.corpusNeeded * (Math.pow(1 + (expectedGrowthRate / 100), year) - 1);
+          }
+        }),
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
         borderColor: 'rgba(54, 162, 235, 1)',
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        fill: false,
+        borderWidth: 1,
+        stack: 'combined',
       },
     ],
   };
@@ -136,8 +158,41 @@ const PlanYourRetirement = () => {
             <p className="mb-2">Number of Years to Invest:</p>
             <p className="text-lg font-semibold mb-2">{results.yearsToInvest}</p>
           </div>
-          <div>
-            <Line data={chartData} />
+          <div className="h-96 w-full">
+            <Bar
+              data={chartData}
+              options={{
+                scales: {
+                  x: {
+                    title: {
+                      display: true,
+                      text: 'Years',
+                    },
+                  },
+                  y: {
+                    title: {
+                      display: true,
+                      text: 'Value (₹)',
+                    },
+                    beginAtZero: true,
+                    stacked: true,
+                  },
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  tooltip: {
+                    callbacks: {
+                      label: function (context) {
+                        const label = context.dataset.label || '';
+                        const value = context.raw || 0;
+                        return `${label}: ₹${value.toFixed(2)}`;
+                      },
+                    },
+                  },
+                },
+              }}
+            />
           </div>
         </div>
       </div>

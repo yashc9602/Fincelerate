@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import 'tailwindcss/tailwind.css';
 
 const BuildYourCorpus = () => {
   const [corpusTarget, setCorpusTarget] = useState(1000000);
   const [yearsToInvest, setYearsToInvest] = useState(10);
   const [expectedGrowthRate, setExpectedGrowthRate] = useState(10);
+  const [investmentType, setInvestmentType] = useState('monthly');
 
   const calculateInvestment = () => {
     const monthsToInvest = yearsToInvest * 12;
@@ -26,22 +27,41 @@ const BuildYourCorpus = () => {
 
   const results = calculateInvestment();
 
+  const graphPoints = Array.from({ length: yearsToInvest }, (_, i) => {
+    const currentYear = i + 1;
+    const totalMonths = currentYear * 12;
+    const sipInvestment = results.SIPAmount * totalMonths;
+    const lumpsumInvestment = results.lumpSumAmount * Math.pow(1 + (expectedGrowthRate / 100), currentYear);
+    const totalInvested = results.SIPAmount * totalMonths;
+    const totalValue = totalInvested * Math.pow(1 + (expectedGrowthRate / 100) / 12, totalMonths);
+    const gains = totalValue - totalInvested;
+
+    return {
+      year: currentYear,
+      totalInvested,
+      gains,
+      lumpsumInvestment: lumpsumInvestment - results.lumpSumAmount,
+    };
+  });
+
   const chartData = {
-    labels: Array.from({ length: results.monthsToInvest }, (_, i) => i + 1),
+    labels: graphPoints.map(point => `Year ${point.year}`),
     datasets: [
       {
-        label: 'Investment Growth (Monthly)',
-        data: Array.from({ length: results.monthsToInvest }, (_, i) => results.SIPAmount * (Math.pow(1 + (expectedGrowthRate / 100) / 12, i + 1) - 1) / ((expectedGrowthRate / 100) / 12)),
-        borderColor: 'rgba(54, 162, 235, 1)',
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        fill: false,
+        label: 'Invested Amount',
+        data: graphPoints.map(point => (investmentType === 'monthly' ? point.totalInvested : results.lumpSumAmount)),
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        stack: 'combined',
       },
       {
-        label: 'Investment Growth (Lumpsum)',
-        data: Array.from({ length: results.monthsToInvest }, (_, i) => results.lumpSumAmount * Math.pow(1 + (expectedGrowthRate / 100) / 12, i + 1)),
-        borderColor: 'rgba(255, 99, 132, 1)',
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        fill: false,
+        label: 'Gains',
+        data: graphPoints.map(point => (investmentType === 'monthly' ? point.gains : point.lumpsumInvestment)),
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+        stack: 'combined',
       },
     ],
   };
@@ -50,7 +70,21 @@ const BuildYourCorpus = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg p-8">
         <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">Build Your Corpus</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="flex justify-center mb-5">
+          <button
+            className={`px-4 py-2 rounded-l-lg ${investmentType === 'monthly' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+            onClick={() => setInvestmentType('monthly')}
+          >
+            Invest Monthly
+          </button>
+          <button
+            className={`px-4 py-2 rounded-r-lg ${investmentType === 'onetime' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+            onClick={() => setInvestmentType('onetime')}
+          >
+            Invest One-time
+          </button>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div>
             <label className="block text-gray-700 font-semibold mb-2">Corpus Target (₹)</label>
             <input
@@ -98,7 +132,40 @@ const BuildYourCorpus = () => {
           </div>
         </div>
         <div className="mt-10">
-          <Line data={chartData} />
+          <Bar
+            data={chartData}
+            options={{
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Years',
+                  },
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Value (₹)',
+                  },
+                  beginAtZero: true,
+                  stacked: true,
+                },
+              },
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      const label = context.dataset.label || '';
+                      const value = context.raw || 0;
+                      return `${label}: ₹${value.toFixed(2)}`;
+                    },
+                  },
+                },
+              },
+            }}
+          />
         </div>
       </div>
     </div>

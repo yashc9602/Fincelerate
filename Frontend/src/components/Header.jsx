@@ -20,7 +20,7 @@ export default function Header() {
     <header className="text-gray-600 body-font sticky top-0 bg-white z-10">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <Link to="/" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-          <svg
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             stroke="currentColor"
@@ -31,8 +31,8 @@ export default function Header() {
             viewBox="0 0 24 24"
           >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
-          <span className="ml-3 text-xl">Fincelerate</span>
+          </svg> */}
+          <span className="ml-3 text-3xl">Fincelerate</span>
         </Link>
         <button
           className="md:hidden ml-auto flex items-center text-gray-900"
@@ -59,7 +59,7 @@ export default function Header() {
           } md:flex flex-col md:flex-row md:ml-auto items-center text-base justify-center w-full md:w-auto`}
         >
           <Link to="/about" className="mr-5 hover:text-gray-900">About Us</Link>
-          <a className="mr-5 hover:text-gray-900">E Yourself</a>
+          <Link to="/eyourself" className="mr-5 hover:text-gray-900">E Yourself</Link>
           <a className="mr-5 hover:text-gray-900">Mutual Funds</a>
           <Link to="/contact" className="mr-5 hover:text-gray-900">Contact Us</Link>
           {isAuthenticated ? (

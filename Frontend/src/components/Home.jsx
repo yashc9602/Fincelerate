@@ -1,4 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Carousel from "./Carousel";
+import ImageCarousel from "./ImageCarousel";
+import SphereCarousel from "./ImageCarousel";
+import localImage from "../assets/images/home_Mobile.jpg";
+import carousel1 from "../assets/images/home_carousel_1.jpg";
 
 export default function Home() {
   return (
@@ -15,19 +21,19 @@ export default function Home() {
                 </h1>
 
                 <div class="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start">
-                  <a
+                  <Link
                     href="#"
-                    class="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base"
+                    class="inline-block rounded-lg bg-[#041D4C] px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-gray-200 hover:text-black focus-visible:ring active:bg-indigo-700 md:text-base"
                   >
                     Invest
-                  </a>
+                  </Link>
 
-                  <a
-                    href="#"
+                  <Link
+                    to="/contact"
                     class="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base"
                   >
-                    Book and Appointment
-                  </a>
+                    Book an Appointment
+                  </Link>
                 </div>
               </div>
 
@@ -121,24 +127,24 @@ export default function Home() {
         </div>
       </div>
 
+      <Carousel />
+      <SphereCarousel />
+
       <div class="bg-white py-6 sm:py-8 lg:py-12">
         <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-          <div class="flex flex-col overflow-hidden rounded-lg bg-gray-900 sm:flex-row md:h-80">
+          <div class="flex flex-col overflow-hidden rounded-lg bg-[#041D4C] sm:flex-row md:h-96">
             <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-1/2">
-              <h2 class="mb-4 text-xl font-bold text-white md:text-2xl lg:text-2xl">
+              <h2 class="mb-4 text-xl font-bold text-white md:text-2xl lg:text-xl">
+                About Fincelerate
+              </h2>
+              <h2 class="mb-4 text-xl font-bold text-white md:text-2xl lg:text-3xl">
                 Fincelerate was developed by a team of experienced financial
                 planners and technology experts.
               </h2>
-
-              <p class="mb-8 max-w-md text-gray-400">
-                This is a section of some simple filler text, also known as
-                placeholder text. It shares some characteristics of a real
-                written text.
-              </p>
             </div>
-            <div class="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-1/2">
-              <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-1/2">
-                <p class="mb-8 max-w-md text-gray-400">
+            <div class="order-start h-48 w-full bg-[#041D4C] sm:order-none sm:h-auto sm:w-1/2 lg:w-1/2">
+              <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-96">
+                <p class="mb-8 max-w-md text-gray-100">
                   Our services include comprehensive financial planning,
                   investment management, retirement planning, tax planning, and
                   more. We provide customized solutions that cater to your
@@ -153,36 +159,35 @@ export default function Home() {
       <div class="bg-white py-6 sm:py-8 lg:py-12">
         <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
           <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row md:h-96">
-            <div class="order-first h-48 w-full bg-gray-300 sm:order-none sm:h-auto sm:w-1/2 lg:w-1/2">
+            <div className="order-first h-48 w-full bg-gray-300 sm:order-none sm:h-auto sm:w-1/2 lg:w-1/2">
               <img
-                src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&q=75&fit=crop&w=1000"
+                src={localImage}
                 loading="lazy"
-                alt="Photo by Andras Vas"
-                class="h-full w-full object-cover object-center"
+                alt="Local Image"
+                className="h-full w-full object-contain object-center bg-white"
               />
             </div>
 
-            <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-1/2">
+            <div class="flex w-full bg-white flex-col p-4 sm:w-1/2 sm:p-8 lg:w-1/2">
               <h2 class="mb-4 text-xl font-bold text-gray-800 md:text-2xl lg:text-4xl">
-              Smart, simple
-              financial planner.
+                Smart, simple <br /> financial planner.
               </h2>
 
-              <p class="mb-8 max-w-md text-gray-600">
-              Whether you’re looking to plan for retirement, save for your 
-child’s education, or invest in your future, we have the 
-expertise and tools to help you succeed.
+              <p class="mb-8 max-w-md text-gray-900 text-lg">
+                Whether you’re looking to plan for retirement, save for your
+                child’s education, or invest in your future, we have the
+                expertise and tools to help you succeed.
               </p>
               <p class="mb-4">
-              Comprehensive Financial Planning <br />
-              Personalized Approach <br />
-              Investment Management <br />
+                Comprehensive Financial Planning <br />
+                Personalized Approach <br />
+                Investment Management <br />
               </p>
 
               <div class="mt-auto">
                 <a
                   href="#"
-                  class="inline-block rounded-lg bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
+                  class="inline-block rounded-lg bg-[#041D4C] text-white hover:text-black px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
                 >
                   Learn More
                 </a>

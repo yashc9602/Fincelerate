@@ -1,14 +1,22 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
+import { 
+  AcademicCapIcon, 
+  BuildingOffice2Icon,
+  CurrencyDollarIcon, 
+  HomeIcon, 
+  HeartIcon, 
+  UserGroupIcon 
+} from '@heroicons/react/24/outline';
 
 const goals = [
-  { name: 'Buy Your Dream Car', path: '/dreamcar', image: '/path/to/car-image.jpg' },
-  { name: 'Buy Your Dream House', path: '/dreamhouse', image: '/path/to/house-image.jpg' },
-  { name: 'Build Your Corpus', path: '/corpus', image: '/path/to/corpus-image.jpg' },
-  { name: "Plan Your Child's Education", path: '/childeducation', image: '/path/to/education-image.jpg' },
-  { name: "Plan Your Child's Marriage", path: '/childmarriage', image: '/path/to/marriage-image.jpg' },
-  { name: 'Plan Your Retirement', path: '/retirementcalculator', image: '/path/to/retirement-image.jpg' },
+  { name: 'Buy Your Dream Car', path: '/dreamcar', icon: BuildingOffice2Icon },
+  { name: 'Buy Your Dream House', path: '/dreamhouse', icon: HomeIcon },
+  { name: 'Build Your Corpus', path: '/corpus', icon: CurrencyDollarIcon },
+  { name: "Plan Your Child's Education", path: '/childeducation', icon: AcademicCapIcon },
+  { name: "Plan Your Child's Marriage", path: '/childmarriage', icon: HeartIcon },
+  { name: 'Plan Your Retirement', path: '/retirementcalculator', icon: UserGroupIcon },
 ];
 
 const GoalsPage = () => {
@@ -28,7 +36,9 @@ const GoalsPage = () => {
             className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transition transform hover:scale-105"
             onClick={() => navigateToGoal(goal.path)}
           >
-            <img src={goal.image} alt={goal.name} className="w-full h-40 object-cover" />
+            <div className="flex items-center justify-center h-40 bg-gray-200">
+              <goal.icon className="h-20 w-20 text-gray-700" />
+            </div>
             <div className="p-4">
               <h2 className="text-2xl font-semibold text-gray-800">{goal.name}</h2>
             </div>

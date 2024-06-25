@@ -1,13 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
+import { 
+  CalculatorIcon, 
+  ChartBarIcon, 
+  ArrowsRightLeftIcon, 
+  CurrencyDollarIcon, 
+  ArrowUpIcon 
+} from '@heroicons/react/24/outline';
 
 const calculators = [
-  { name: 'SIP Calculator', path: '/sipcalculator', image: '/path/to/sip-calculator-image.jpg' },
-  { name: 'Lumpsum Calculator', path: '/lumpsumcalculator', image: '/path/to/lumpsum-calculator-image.jpg' },
-  { name: 'STP Calculator', path: '/stpcalculator', image: '/path/to/stp-calculator-image.jpg' },
-  { name: 'SWP Calculator', path: '/swpcalculator', image: '/path/to/swp-calculator-image.jpg' },
-  { name: 'SIP Step Up Calculator', path: '/stepupsipcalculator', image: '/path/to/sip-step-up-calculator-image.jpg' },
+  { name: 'SIP Calculator', path: '/sipcalculator', icon: CalculatorIcon },
+  { name: 'Lumpsum Calculator', path: '/lumpsumcalculator', icon: ChartBarIcon },
+  { name: 'STP Calculator', path: '/stpcalculator', icon: ArrowsRightLeftIcon },
+  { name: 'SWP Calculator', path: '/swpcalculator', icon: CurrencyDollarIcon },
+  { name: 'SIP Step Up Calculator', path: '/stepupsipcalculator', icon: ArrowUpIcon },
 ];
 
 const CalculatorsPage = () => {
@@ -27,7 +34,9 @@ const CalculatorsPage = () => {
             className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transition transform hover:scale-105"
             onClick={() => navigateToCalculator(calculator.path)}
           >
-            <img src={calculator.image} alt={calculator.name} className="w-full h-40 object-cover" />
+            <div className="flex items-center justify-center h-40 bg-gray-200">
+              <calculator.icon className="h-20 w-20 text-gray-700" />
+            </div>
             <div className="p-4">
               <h2 className="text-2xl font-semibold text-gray-800">{calculator.name}</h2>
             </div>
