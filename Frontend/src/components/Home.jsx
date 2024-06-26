@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Carousel from "./Carousel";
-import ImageCarousel from "./ImageCarousel";
-import SphereCarousel from "./ImageCarousel";
 import localImage from "../assets/images/home_Mobile.jpg";
+import hero from "../assets/images/home_hero.jpg";
 import carousel1 from "../assets/images/home_carousel_1.jpg";
+import CustomCarousel from "./Carousel";
 
 export default function Home() {
   return (
@@ -30,7 +30,7 @@ export default function Home() {
 
                   <Link
                     to="/contact"
-                    class="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base"
+                    class="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base"
                   >
                     Book an Appointment
                   </Link>
@@ -115,20 +115,17 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="h-48 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:h-auto xl:w-5/12">
+            <div class="h-48 overflow-hidden rounded-lg bg-gray-200 h-screen shadow-lg xl:w-5/12">
               <img
-                src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&q=75&fit=crop&w=1000"
+                src={hero}
                 loading="lazy"
-                alt="Photo by Fakurian Design"
                 class="h-full w-full object-cover object-center"
               />
             </div>
           </section>
         </div>
       </div>
-
-      <Carousel />
-      <SphereCarousel />
+      <CustomCarousel />
 
       <div class="bg-white py-6 sm:py-8 lg:py-12">
         <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
@@ -187,7 +184,7 @@ export default function Home() {
               <div class="mt-auto">
                 <a
                   href="#"
-                  class="inline-block rounded-lg bg-[#041D4C] text-white hover:text-black px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
+                  class="inline-block rounded-lg bg-[#041D4C] text-white hover:text-black px-8 py-3 text-center text-sm font-semibold  outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
                 >
                   Learn More
                 </a>

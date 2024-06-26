@@ -110,7 +110,9 @@ export default function Footer() {
                 <div>
                   <Link to="/calculators" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Calculators</Link>
                 </div>
-
+                <div>
+                  <Link to="/eyourself" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Educate Yourself</Link>
+                </div>
 
               </nav>
             </div>

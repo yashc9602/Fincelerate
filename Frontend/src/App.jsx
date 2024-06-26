@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './components/Home';
 import Signin from './components/Signin';
-import Contact from './components/Contact';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
 import About from './components/About';
@@ -28,11 +27,13 @@ import PlanYourRetirement from './components/Goals/RetirementCalc';
 import GoalsPage from './components/Goals';
 import PlanYourChildEducation from './components/Goals/ChildEducation';
 import CalculatorsPage from './components/Calculators/Calculators';
-import MediaPage from './components/EYourself';
 import AboutUs1 from './components/About1';
 import Carousel from './components/Carousel';
-import SphereCarousel from './components/ImageCarousel';
 import Blog from './components/Blogs';
+import ExploreYourself from './components/EYourself';
+import Calendly from './components/Appointment';
+import ContactUsPage from './components/ContactUs';
+import ContactForm from './components/Contact';
 
 function App() {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={<ContactForm />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/about" element={<About />} />
@@ -72,13 +73,12 @@ function App() {
         <Route path="/goals" element={<GoalsPage />} />
         <Route path="/childeducation" element={<PlanYourChildEducation />} />
         <Route path="/calculators" element={<CalculatorsPage />} />
-        <Route path="/eyourself" element={<MediaPage />} />
+        <Route path="/eyourself" element={<ExploreYourself />} />
         <Route path="/aboutus" element={<AboutUs1 />} />
         <Route path="/carousel" element={<Carousel />} />
-        <Route path="/imagecarousel" element={<SphereCarousel />} />
         <Route path="/blogs" element={<Blog />} />
-
-
+        <Route path="/appointment" element={<Calendly />} />
+        <Route path="/contactus" element={<ContactUsPage />} />
         
       </Routes>
       <Footer />
