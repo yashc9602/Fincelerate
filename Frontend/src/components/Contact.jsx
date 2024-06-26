@@ -41,7 +41,7 @@ const ContactForm = () => {
   return (
     <div className="bg-gray-100 min-h-screen py-10">
       <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-10 text-center">Contact Us</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-10 text-center">Contact Us</h1>
         <form className="bg-white shadow-lg rounded-lg p-8" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="your-name">Your name</label>

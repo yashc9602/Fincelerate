@@ -73,7 +73,7 @@ export default function Footer() {
                 </div>
 
                 <div>
-                  <a href="#" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Contact</a>
+                  <a href="/contactus" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Contact</a>
                 </div>
 
                 <div>

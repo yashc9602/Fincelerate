@@ -8,6 +8,7 @@ import {
   CurrencyDollarIcon, 
   ArrowUpIcon 
 } from '@heroicons/react/24/outline';
+import useScrollToTop from '../useScrollToTop';
 
 const calculators = [
   { name: 'SIP Calculator', path: '/sipcalculator', icon: CalculatorIcon },
@@ -18,6 +19,7 @@ const calculators = [
 ];
 
 const CalculatorsPage = () => {
+  useScrollToTop();
   const navigate = useNavigate();
 
   const navigateToCalculator = (path) => {

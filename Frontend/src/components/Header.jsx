@@ -61,7 +61,7 @@ export default function Header() {
           <Link to="/about" className="mr-5 hover:text-gray-900">About Us</Link>
           <Link to="/eyourself" className="mr-5 hover:text-gray-900">E Yourself</Link>
           <a className="mr-5 hover:text-gray-900">Mutual Funds</a>
-          <Link to="/contact" className="mr-5 hover:text-gray-900">Contact Us</Link>
+          <Link to="/contactus" className="mr-5 hover:text-gray-900">Contact Us</Link>
           {isAuthenticated ? (
             <button
               onClick={handleLogout}

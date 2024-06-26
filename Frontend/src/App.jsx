@@ -8,7 +8,7 @@ import Signin from './components/Signin';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
 import About from './components/About';
-import ProfileForm from './components/ProfileForm'; // Import ProfileForm
+import ProfileForm from './components/ProfileForm';
 import store from './redux/store';
 import { loginSuccess } from './redux/authReducer';
 import ProfileView from './components/ProfileView';
@@ -24,7 +24,7 @@ import ChildMarriageGoal from './components/Goals/ChildMarriage';
 import BuildYourCorpus from './components/Goals/Corpus';
 import PlanYourGoal from './components/Goals/PlanYourGoal';
 import PlanYourRetirement from './components/Goals/RetirementCalc';
-import GoalsPage from './components/Goals';
+import GoalsPage from './components/Goals/Goals';
 import PlanYourChildEducation from './components/Goals/ChildEducation';
 import CalculatorsPage from './components/Calculators/Calculators';
 import AboutUs1 from './components/About1';
@@ -34,6 +34,7 @@ import ExploreYourself from './components/EYourself';
 import Calendly from './components/Appointment';
 import ContactUsPage from './components/ContactUs';
 import ContactForm from './components/Contact';
+import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute component
 
 function App() {
   const dispatch = useDispatch();
@@ -56,30 +57,33 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/about" element={<About />} />
-        <Route path="/profile" element={<ProfileForm />} /> 
-        <Route path="/profile/view" element={<ProfileView />} />
-        <Route path="/sipcalculator" element={<SIPCalculator />} />
-        <Route path="/lumpsumcalculator" element={<LumpsumCalculator />} />
-        <Route path="/stepupsipcalculator" element={<StepUpSIPCalculator />} />
-        <Route path="/swpcalculator" element={<SWPCalculator />} />
-        <Route path="/stpcalculator" element={<STPCalculator />} />
-        <Route path="/dreamcar" element={<BuyDreamCar />} />
-        <Route path="/dreamhouse" element={<DreamHouseGoal />} />
-        <Route path="/childplan" element={<ChildEducationGoal />} />
-        <Route path="/childmarriage" element={<ChildMarriageGoal />} />
-        <Route path="/corpus" element={<BuildYourCorpus />} />
-        <Route path="/planyourgoal" element={<PlanYourGoal />} />
-        <Route path="/retirementcalculator" element={<PlanYourRetirement />} />
-        <Route path="/goals" element={<GoalsPage />} />
-        <Route path="/childeducation" element={<PlanYourChildEducation />} />
-        <Route path="/calculators" element={<CalculatorsPage />} />
-        <Route path="/eyourself" element={<ExploreYourself />} />
-        <Route path="/aboutus" element={<AboutUs1 />} />
-        <Route path="/carousel" element={<Carousel />} />
-        <Route path="/blogs" element={<Blog />} />
-        <Route path="/appointment" element={<Calendly />} />
-        <Route path="/contactus" element={<ContactUsPage />} />
-        
+
+        {/* Use the ProtectedRoute for protected pages */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={<ProfileForm />} />
+          <Route path="/profile/view" element={<ProfileView />} />
+          <Route path="/sipcalculator" element={<SIPCalculator />} />
+          <Route path="/lumpsumcalculator" element={<LumpsumCalculator />} />
+          <Route path="/stepupsipcalculator" element={<StepUpSIPCalculator />} />
+          <Route path="/swpcalculator" element={<SWPCalculator />} />
+          <Route path="/stpcalculator" element={<STPCalculator />} />
+          <Route path="/dreamcar" element={<BuyDreamCar />} />
+          <Route path="/dreamhouse" element={<DreamHouseGoal />} />
+          <Route path="/childplan" element={<ChildEducationGoal />} />
+          <Route path="/childmarriage" element={<ChildMarriageGoal />} />
+          <Route path="/corpus" element={<BuildYourCorpus />} />
+          <Route path="/planyourgoal" element={<PlanYourGoal />} />
+          <Route path="/retirementcalculator" element={<PlanYourRetirement />} />
+          <Route path="/goals" element={<GoalsPage />} />
+          <Route path="/childeducation" element={<PlanYourChildEducation />} />
+          <Route path="/calculators" element={<CalculatorsPage />} />
+          <Route path="/eyourself" element={<ExploreYourself />} />
+          <Route path="/aboutus" element={<AboutUs1 />} />
+          <Route path="/carousel" element={<Carousel />} />
+          <Route path="/blogs" element={<Blog />} />
+          <Route path="/appointment" element={<Calendly />} />
+          <Route path="/contactus" element={<ContactUsPage />} />
+        </Route>
       </Routes>
       <Footer />
     </div>

@@ -9,6 +9,7 @@ import {
   HeartIcon, 
   UserGroupIcon 
 } from '@heroicons/react/24/outline';
+import useScrollToTop from '../useScrollToTop';
 
 const goals = [
   { name: 'Buy Your Dream Car', path: '/dreamcar', icon: BuildingOffice2Icon },
@@ -20,6 +21,7 @@ const goals = [
 ];
 
 const GoalsPage = () => {
+  useScrollToTop();
   const navigate = useNavigate();
 
   const navigateToGoal = (path) => {

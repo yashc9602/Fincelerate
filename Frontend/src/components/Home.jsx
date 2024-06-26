@@ -1,56 +1,62 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Carousel from "./Carousel";
-import localImage from "../assets/images/home_Mobile.jpg";
-import hero from "../assets/images/home_hero.jpg";
-import carousel1 from "../assets/images/home_carousel_1.jpg";
-import CustomCarousel from "./Carousel";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import ContactForm from './Contact';
+import Calendly from './Appointment';
+import CustomCarousel from './Carousel';
+import localImage from '../assets/images/home_Mobile.jpg';
+import hero from '../assets/images/home_hero.jpg';
 
-export default function Home() {
+const Home = () => {
+  const [activeTab, setActiveTab] = useState('query');
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
     <div>
-      <div class="bg-white pb-6 sm:pb-8 lg:pb-12">
-        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-          <section class="flex flex-col justify-between gap-6 sm:gap-10 md:gap-16 lg:flex-row">
-            <div class="flex flex-col justify-between xl:w-5/12">
+      <div className="bg-white pb-6 sm:pb-8 lg:pb-12">
+        <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+          <section className="flex flex-col justify-between gap-6 sm:gap-10 md:gap-16 lg:flex-row">
+            <div className="flex flex-col justify-between xl:w-5/12">
               <div></div>
 
-              <div class="sm:text-center lg:py-12 lg:text-left xl:py-24">
-                <h1 class="mb-8 text-4xl font-bold text-black sm:text-5xl md:mb-12 md:text-6xl">
-                  Accelerate your Financials . . .{" "}
+              <div className="sm:text-center lg:py-12 lg:text-left xl:py-24">
+                <h1 className="mb-8 text-4xl font-bold text-black sm:text-5xl md:mb-12 md:text-6xl">
+                  Accelerate your Financials . . .
                 </h1>
 
-                <div class="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start">
+                <div className="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start">
                   <Link
-                    href="#"
-                    class="inline-block rounded-lg bg-[#041D4C] px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-gray-200 hover:text-black focus-visible:ring active:bg-indigo-700 md:text-base"
+                    to="/contactus"
+                    className="inline-block rounded-lg bg-[#041D4C] px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-gray-200 hover:text-black focus-visible:ring active:bg-indigo-700 md:text-base"
                   >
                     Invest
                   </Link>
 
                   <Link
-                    to="/contact"
-                    class="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base"
+                    to="/appointment"
+                    className="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base"
                   >
                     Book an Appointment
                   </Link>
                 </div>
               </div>
 
-              <div class="mt-8 flex items-center justify-center gap-4 sm:mt-16 lg:justify-start">
-                <span class="text-sm font-semibold uppercase tracking-widest text-gray-400 sm:text-base">
+              <div className="mt-8 flex items-center justify-center gap-4 sm:mt-16 lg:justify-start">
+                <span className="text-sm font-semibold uppercase tracking-widest text-gray-400 sm:text-base">
                   Social
                 </span>
-                <span class="h-px w-12 bg-gray-200"></span>
+                <span className="h-px w-12 bg-gray-200"></span>
 
-                <div class="flex gap-4">
+                <div className="flex gap-4">
                   <a
                     href="#"
                     target="_blank"
-                    class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600"
+                    className="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600"
                   >
                     <svg
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
@@ -64,10 +70,10 @@ export default function Home() {
                   <a
                     href="#"
                     target="_blank"
-                    class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600"
+                    className="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600"
                   >
                     <svg
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
@@ -81,10 +87,10 @@ export default function Home() {
                   <a
                     href="#"
                     target="_blank"
-                    class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600"
+                    className="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600"
                   >
                     <svg
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
@@ -98,10 +104,10 @@ export default function Home() {
                   <a
                     href="#"
                     target="_blank"
-                    class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600"
+                    className="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600"
                   >
                     <svg
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
@@ -115,11 +121,14 @@ export default function Home() {
               </div>
             </div>
 
-            <div class="h-48 overflow-hidden rounded-lg bg-gray-200 h-screen shadow-lg xl:w-5/12">
+            <div
+              className="overflow-hidden rounded-lg bg-gray-200 shadow-lg hidden lg:block xl:w-7/12"
+              style={{ height: "90vh" }}
+            >
               <img
                 src={hero}
                 loading="lazy"
-                class="h-full w-full object-cover object-center"
+                className="h-full w-full object-cover object-center"
               />
             </div>
           </section>
@@ -127,21 +136,21 @@ export default function Home() {
       </div>
       <CustomCarousel />
 
-      <div class="bg-white py-6 sm:py-8 lg:py-12">
-        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-          <div class="flex flex-col overflow-hidden rounded-lg bg-[#041D4C] sm:flex-row md:h-96">
-            <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-1/2">
-              <h2 class="mb-4 text-xl font-bold text-white md:text-2xl lg:text-xl">
+      <div className="bg-white py-6 sm:py-8 lg:py-12">
+        <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+          <div className="flex flex-col overflow-hidden rounded-lg bg-[#041D4C] sm:flex-row md:h-96">
+            <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-1/2">
+              <h2 className="mb-4 text-xl font-bold text-white md:text-2xl lg:text-xl">
                 About Fincelerate
               </h2>
-              <h2 class="mb-4 text-xl font-bold text-white md:text-2xl lg:text-3xl">
+              <h2 className="mb-4 text-xl font-bold text-white md:text-2xl lg:text-3xl">
                 Fincelerate was developed by a team of experienced financial
                 planners and technology experts.
               </h2>
             </div>
-            <div class="order-start h-48 w-full bg-[#041D4C] sm:order-none sm:h-auto sm:w-1/2 lg:w-1/2">
-              <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-96">
-                <p class="mb-8 max-w-md text-gray-100">
+            <div className="order-start h-48 w-full bg-[#041D4C] sm:order-none sm:h-auto sm:w-1/2 lg:w-1/2">
+              <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-96">
+                <p className="mb-8 max-w-md text-gray-100">
                   Our services include comprehensive financial planning,
                   investment management, retirement planning, tax planning, and
                   more. We provide customized solutions that cater to your
@@ -153,9 +162,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div class="bg-white py-6 sm:py-8 lg:py-12">
-        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-          <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row md:h-96">
+      <div className="bg-white py-6 sm:py-8 lg:py-12">
+        <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+          <div className="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row md:h-96">
             <div className="order-first h-48 w-full bg-gray-300 sm:order-none sm:h-auto sm:w-1/2 lg:w-1/2">
               <img
                 src={localImage}
@@ -165,34 +174,62 @@ export default function Home() {
               />
             </div>
 
-            <div class="flex w-full bg-white flex-col p-4 sm:w-1/2 sm:p-8 lg:w-1/2">
-              <h2 class="mb-4 text-xl font-bold text-gray-800 md:text-2xl lg:text-4xl">
+            <div className="flex w-full bg-white flex-col p-4 sm:w-1/2 sm:p-8 lg:w-1/2">
+              <h2 className="mb-4 text-xl font-bold text-gray-800 md:text-2xl lg:text-4xl">
                 Smart, simple <br /> financial planner.
               </h2>
 
-              <p class="mb-8 max-w-md text-gray-900 text-lg">
+              <p className="mb-8 max-w-md text-gray-900 text-lg">
                 Whether you’re looking to plan for retirement, save for your
                 child’s education, or invest in your future, we have the
                 expertise and tools to help you succeed.
               </p>
-              <p class="mb-4">
+              <p className="mb-4">
                 Comprehensive Financial Planning <br />
                 Personalized Approach <br />
                 Investment Management <br />
               </p>
 
-              <div class="mt-auto">
-                <a
-                  href="#"
-                  class="inline-block rounded-lg bg-[#041D4C] text-white hover:text-black px-8 py-3 text-center text-sm font-semibold  outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
+              <div className="mt-auto">
+                <Link
+                  to="/contactus"
+                  className="inline-block rounded-lg bg-[#041D4C] text-white hover:text-black px-8 py-3 text-center text-sm font-semibold  outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
                 >
                   Learn More
-                </a>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div className="container mx-auto p-5">
+        <div className="bg-white p-5 rounded-lg shadow-lg">
+          <div className="flex justify-center mb-5">
+            <button
+              onClick={() => handleTabClick('query')}
+              className={`mr-4 px-4 py-2 font-semibold rounded ${
+                activeTab === 'query' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-700'
+              }`}
+            >
+              Query Form
+            </button>
+            <button
+              onClick={() => handleTabClick('appointment')}
+              className={`px-4 py-2 font-semibold rounded ${
+                activeTab === 'appointment' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-700'
+              }`}
+            >
+              Book Appointment
+            </button>
+          </div>
+          <div>
+            {activeTab === 'query' ? <ContactForm /> : <Calendly />}
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Home;

@@ -4,9 +4,9 @@ import { InlineWidget } from 'react-calendly';
 const Calendly = () => {
   return (
     <div className="bg-gray-100 min-h-screen py-6 sm:py-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-6 sm:mb-10 text-center">Book an Appointment</h1>
-        <div className="bg-white shadow-lg rounded-lg p-4 sm:p-8">
+      <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-6 sm:mb-10 text-center">Book an Appointment</h1>
+        <div className="bg-white shadow-lg rounded-lg sm:p-8">
           <InlineWidget
             url="https://calendly.com/fincelerate/30min"
             styles={{ height: '600px' }} // Reduced height for better mobile experience
