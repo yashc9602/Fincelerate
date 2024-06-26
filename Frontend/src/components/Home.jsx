@@ -202,32 +202,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      <div className="container mx-auto p-5">
-        <div className="bg-white p-5 rounded-lg shadow-lg">
-          <div className="flex justify-center mb-5">
-            <button
-              onClick={() => handleTabClick('query')}
-              className={`mr-4 px-4 py-2 font-semibold rounded ${
-                activeTab === 'query' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-700'
-              }`}
-            >
-              Query Form
-            </button>
-            <button
-              onClick={() => handleTabClick('appointment')}
-              className={`px-4 py-2 font-semibold rounded ${
-                activeTab === 'appointment' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-700'
-              }`}
-            >
-              Book Appointment
-            </button>
-          </div>
-          <div>
-            {activeTab === 'query' ? <ContactForm /> : <Calendly />}
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
