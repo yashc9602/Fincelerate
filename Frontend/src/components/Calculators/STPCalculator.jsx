@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import ButtonGroup from '../3Button';
-
-
-const inflationRate = 6 / 100;
 
 export default function STPCalculator() {
   const [sourceInvestment, setSourceInvestment] = useState(100000);
   const [sourceReturns, setSourceReturns] = useState(8);
   const [transferAmount, setTransferAmount] = useState(1000);
   const [frequency, setFrequency] = useState(1); // Monthly
-  const [targetPeriod, setTargetPeriod] = useState(12); // In months
+  const [targetPeriod, setTargetPeriod] = useState(1); // In years
   const [targetReturns, setTargetReturns] = useState(10);
 
   const [sourceGains, setSourceGains] = useState(0);
@@ -24,11 +21,12 @@ export default function STPCalculator() {
     const calculateSTP = () => {
       const sourceMonthlyRate = sourceReturns / 100 / 12;
       const targetMonthlyRate = targetReturns / 100 / 12;
+      const totalMonths = targetPeriod * 12;
 
       let remainingSource = sourceInvestment;
       let accumulatedTarget = 0;
       let growthData = [];
-      let monthlyWithdrawals = targetPeriod * frequency;
+      let monthlyWithdrawals = totalMonths;
 
       for (let i = 1; i <= monthlyWithdrawals; i++) {
         let actualTransferAmount = Math.min(transferAmount, remainingSource);
@@ -42,11 +40,13 @@ export default function STPCalculator() {
         let targetGainsThisMonth = accumulatedTarget * targetMonthlyRate;
         accumulatedTarget += targetGainsThisMonth;
 
-        growthData.push({
-          month: i,
-          remainingSource: Math.max(remainingSource, 0),
-          accumulatedTarget: accumulatedTarget,
-        });
+        if (i % 12 === 0) {
+          growthData.push({
+            year: i / 12,
+            remainingSource: Math.max(remainingSource, 0),
+            accumulatedTarget: accumulatedTarget,
+          });
+        }
 
         if (remainingSource <= 0) {
           monthlyWithdrawals = i;
@@ -54,49 +54,62 @@ export default function STPCalculator() {
         }
       }
 
-      let expectedGainsValue = accumulatedTarget - sourceInvestment;
-      setSourceGains(sourceInvestment * (1 + sourceMonthlyRate) ** targetPeriod - sourceInvestment);
+      setSourceGains(sourceInvestment * (1 + sourceMonthlyRate) ** totalMonths - sourceInvestment);
       setTargetGains(accumulatedTarget - sourceInvestment);
       setFinalValue(remainingSource + accumulatedTarget);
       setTotalGains((remainingSource + accumulatedTarget) - sourceInvestment);
       setGraphData(growthData);
     };
 
-    calculateSTP();
+    if (
+      sourceInvestment > 0 &&
+      sourceReturns > 0 &&
+      transferAmount > 0 &&
+      frequency > 0 &&
+      targetPeriod > 0 &&
+      targetReturns > 0 &&
+      transferAmount <= sourceInvestment
+    ) {
+      calculateSTP();
+    }
   }, [sourceInvestment, sourceReturns, transferAmount, frequency, targetPeriod, targetReturns]);
 
   const data = {
-    labels: graphData.map(data => `Month ${data.month}`),
+    labels: graphData.map(data => `Year ${data.year}`),
     datasets: [
       {
         label: 'Remaining Source Fund',
         data: graphData.map(data => data.remainingSource),
-        fill: false,
-        borderColor: 'rgba(255, 99, 132, 1)',
-        tension: 0.1,
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
       },
       {
         label: 'Accumulated Target Fund',
         data: graphData.map(data => data.accumulatedTarget),
-        fill: false,
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
         borderColor: 'rgba(54, 162, 235, 1)',
-        tension: 0.1,
+        borderWidth: 1,
       },
     ],
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
+        stacked: true,
         title: {
           display: true,
-          text: 'Months',
+          text: 'Years',
         },
       },
       y: {
+        stacked: true,
         title: {
           display: true,
-          text: 'Remaining Investment (₹)',
+          text: 'Amount (₹)',
         },
         beginAtZero: true,
       },
@@ -149,7 +162,7 @@ export default function STPCalculator() {
             />
           </div>
           <div className="w-full md:w-1/4 p-2">
-            <label className="block text-gray-700 mb-2">Time Period to Stay Invested in Target Fund (Months)</label>
+            <label className="block text-gray-700 mb-2">Time Period to Stay Invested in Target Fund (Years)</label>
             <input
               type="number"
               min="1"
@@ -171,7 +184,7 @@ export default function STPCalculator() {
         </div>
         <div className="flex flex-col items-center mb-5">
           <div className="w-full md:w-3/4 h-64">
-            <Line data={data} options={options} />
+            <Bar data={data} options={options} />
           </div>
         </div>
         <div className="flex flex-col md:flex-row justify-around items-center">
