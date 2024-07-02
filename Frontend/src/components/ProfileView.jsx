@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const ProfileView = () => {
@@ -25,59 +24,65 @@ const ProfileView = () => {
   }, []);
 
   if (!profile) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-2xl">Loading...</div>
+      </div>
+    );
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">Your Profile</h2>
-      <div className="bg-white shadow-md rounded-lg p-6 space-y-4">
-        <div>
-          <h3 className="text-lg font-semibold">Investment Preference</h3>
-          <p>{profile.wouldInvest === 'yes' ? 'Yes' : 'No'}</p>
+    <div className="max-w-2xl mx-auto p-6 mt-6 bg-gray-100 rounded-lg shadow-lg">
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Your Profile</h2>
+      <div className="bg-white shadow-lg rounded-lg p-6 space-y-6">
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xl font-semibold text-gray-700">Investment Preference</h3>
+          <p className="text-lg text-gray-600">{profile.wouldInvest === 'yes' ? 'Yes' : 'No'}</p>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold">Yearly Income</h3>
-          <p>₹{profile.yearlyIncome}</p>
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xl font-semibold text-gray-700">Yearly Income</h3>
+          <p className="text-lg text-gray-600">₹{profile.yearlyIncome}</p>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold">Source of Income</h3>
-          <p>{profile.sourceOfIncome}</p>
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xl font-semibold text-gray-700">Source of Income</h3>
+          <p className="text-lg text-gray-600">{profile.sourceOfIncome}</p>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold">Used Buy Now Pay Later</h3>
-          <p>{profile.usedBuyNowPayLater === 'yes' ? 'Yes' : 'No'}</p>
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xl font-semibold text-gray-700">Used Buy Now Pay Later</h3>
+          <p className="text-lg text-gray-600">{profile.usedBuyNowPayLater === 'yes' ? 'Yes' : 'No'}</p>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold">Currently Invested</h3>
-          <p>{profile.currentlyInvested === 'yes' ? 'Yes' : 'No'}</p>
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xl font-semibold text-gray-700">Currently Invested</h3>
+          <p className="text-lg text-gray-600">{profile.currentlyInvested === 'yes' ? 'Yes' : 'No'}</p>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold">Current Portfolio Size</h3>
-          <p>{profile.portfolioSize}</p>
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xl font-semibold text-gray-700">Current Portfolio Size</h3>
+          <p className="text-lg text-gray-600">{profile.portfolioSize}</p>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold">Investment Options</h3>
-          <ul>
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xl font-semibold text-gray-700">Investment Options</h3>
+          <ul className="list-disc list-inside text-lg text-gray-600">
             {profile.investmentOptions.map(option => (
               <li key={option}>{option}</li>
             ))}
           </ul>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold">Investment Duration</h3>
-          <p>{profile.investmentDuration} years</p>
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xl font-semibold text-gray-700">Investment Duration</h3>
+          <p className="text-lg text-gray-600">{profile.investmentDuration} years</p>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold">Risk Tolerance</h3>
-          <p>{profile.riskTolerance}</p>
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xl font-semibold text-gray-700">Risk Tolerance</h3>
+          <p className="text-lg text-gray-600">{profile.riskTolerance}</p>
         </div>
-        <button
-          onClick={() => navigate('/profile/edit')}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md"
-        >
-          Edit Profile
-        </button>
+        <div className="flex justify-center">
+          <button
+            onClick={() => navigate('/profile/edit')}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300"
+          >
+            Edit Profile
+          </button>
+        </div>
       </div>
     </div>
   );

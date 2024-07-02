@@ -1,4 +1,3 @@
-// App.js
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider, useDispatch, useSelector } from "react-redux";
@@ -10,6 +9,7 @@ import Privacy from "./components/Privacy";
 import Terms from "./components/Terms";
 import About from "./components/About";
 import ProfileForm from "./components/ProfileForm";
+import ProfileEdit from "./components/ProfileEdit";
 import store from "./redux/store";
 import { loginSuccess } from "./redux/authReducer";
 import ProfileView from "./components/ProfileView";
@@ -80,10 +80,10 @@ function App() {
         <Route path="/blogs" element={<Blog />} />
         <Route path="/contactus" element={<ContactUsPage />} />
 
-        <Route element={<ProtectedRoute />}>
+        <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
           <Route path="/profile" element={<ProfileForm />} />
           <Route path="/profile/view" element={<ProfileView />} />
-          <Route path="/appointment" element={<Calendly />} />
+          <Route path="/profile/edit" element={<ProfileEdit />} />
         </Route>
       </Routes>
       <Footer />

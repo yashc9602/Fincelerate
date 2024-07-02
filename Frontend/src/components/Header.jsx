@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/authReducer';
 import logo from '../assets/images/Fincelerate Final logo.png';
@@ -9,6 +9,8 @@ export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     // Clear local storage
@@ -26,6 +28,22 @@ export default function Header() {
   const closeMenu = () => {
     setIsOpen(false);
     setIsDropdownOpen(false);
+  };
+
+  const handleProfileClick = async () => {
+    const response = await fetch('https://fincelerate.onrender.com/server/profile', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    });
+    const data = await response.json();
+    if (data.success && data.profile) {
+      navigate('/profile/view');
+    } else {
+      navigate('/profile');
+    }
   };
 
   return (
@@ -109,23 +127,31 @@ export default function Header() {
           <Link to="/contactus" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>Contact Us</Link>
         </nav>
         {isAuthenticated ? (
-          <button
-            onClick={handleLogout}
-            className="hidden md:inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-          >
-            Signout
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-4 h-4 ml-1"
-              viewBox="0 0 24 24"
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={handleProfileClick}
+              className="bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
             >
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </button>
+              Profile
+            </button>
+            <button
+              onClick={handleLogout}
+              className="hidden md:inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+            >
+              Signout
+              <svg
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                className="w-4 h-4 ml-1"
+                viewBox="0 0 24 24"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
         ) : (
           <Link
             to="/signin"

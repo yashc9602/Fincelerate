@@ -58,15 +58,17 @@ const Home = () => {
             </div>
 
             <div
-              className="overflow-hidden bg-white hidden lg:block xl:w-7/12"
-              style={{ height: "75vh" }}
-            >
-              <img
-                src={hero}
-                loading="lazy"
-                className="h-full w-full object-contain object-center rounded-lg"
-              />
-            </div>
+  className="bg-white hidden lg:block xl:w-7/12 rounded-lg"
+  style={{ height: "75vh" }}
+>
+  <img
+    src={hero}
+    loading="lazy"
+    className="h-full w-full object-cover object-center rounded-lg"
+  />
+</div>
+
+
           </section>
         </div>
       </div>
@@ -141,7 +143,7 @@ const Home = () => {
       </div>
 
       {showNotification && (
-        <div className="fixed bottom-4 right-4 bg-blue-500 text-white rounded-full px-4 py-2 shadow-lg cursor-pointer flex items-center" onClick={handleNotificationClick}>
+        <div className="fixed bottom-4 right-4 bg-[#041D4C] text-white rounded-full px-4 py-2 shadow-lg cursor-pointer flex items-center" onClick={handleNotificationClick}>
           <div className="mr-2 w-2 h-2 bg-red-500 rounded-full"></div>
           Get in touch with us
         </div>
