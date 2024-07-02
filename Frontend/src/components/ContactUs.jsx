@@ -20,7 +20,7 @@ const ContactUsPage = () => {
           <div className="space-y-4 m-4 md:m-12">
             <div className="flex items-center">
               <FaEnvelope className="text-gray-600 mr-3" />
-              <span>fincelerate@gmail.com</span>
+              <span>contact@fincelerate.com</span>
             </div>
             <div className="flex items-center">
               <FaPhone className="text-gray-600 mr-3" />
@@ -53,6 +53,17 @@ const ContactUsPage = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="mt-10">
+        <iframe
+          title="Fincelerate Location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.7497045224686!2d77.5674799!3d12.923802100000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15817ee5f0c9%3A0xcde9bb618e9ca885!2s259%2C%2014th%20Main%20Rd%2C%20Siddanna%20Layout%2C%20Banashankari%20Stage%20II%2C%20Banashankari%2C%20Bengaluru%2C%20Karnataka%20560070!5e0!3m2!1sen!2sin!4v1719946958938!5m2!1sen!2sin"
+          width="100%"
+          height="450"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+        ></iframe>
       </div>
     </div>
   );

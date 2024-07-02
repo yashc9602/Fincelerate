@@ -113,23 +113,38 @@ const BuildYourCorpus = () => {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h3 className="text-2xl font-semibold mb-4">Monthly Investment</h3>
-            <p className="mb-2">Corpus Target: ₹{results.corpusTarget}</p>
-            <p className="mb-2">Monthly Amount to be invested:</p>
-            <p className="text-lg font-semibold mb-2">₹{results.SIPAmount}</p>
-            <p className="mb-2">Number of Months to invest:</p>
-            <p className="text-lg font-semibold mb-2">{results.monthsToInvest}</p>
-          </div>
-          <div>
-            <h3 className="text-2xl font-semibold mb-4">One-time/Lumpsum Investment</h3>
-            <p className="mb-2">Corpus Target: ₹{results.corpusTarget}</p>
-            <p className="mb-2">Lumpsum Amount to be invested:</p>
-            <p className="text-lg font-semibold mb-2">₹{results.lumpSumAmount}</p>
-            <p className="mb-2">Number of Years to invest:</p>
-            <p className="text-lg font-semibold mb-2">{results.yearsToInvest}</p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {investmentType === 'monthly' ? (
+            <>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                <h3 className="text-lg font-semibold">Corpus Target</h3>
+                <p className="text-2xl font-bold">{`₹ ${results.corpusTarget}`}</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                <h3 className="text-lg font-semibold">Monthly Amount to be invested</h3>
+                <p className="text-2xl font-bold">{`₹ ${results.SIPAmount}`}</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                <h3 className="text-lg font-semibold">Number of Months to invest</h3>
+                <p className="text-2xl font-bold">{results.monthsToInvest}</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                <h3 className="text-lg font-semibold">Corpus Target</h3>
+                <p className="text-2xl font-bold">{`₹ ${results.corpusTarget}`}</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                <h3 className="text-lg font-semibold">Lumpsum Amount to be invested</h3>
+                <p className="text-2xl font-bold">{`₹ ${results.lumpSumAmount}`}</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                <h3 className="text-lg font-semibold">Number of Years to invest</h3>
+                <p className="text-2xl font-bold">{results.yearsToInvest}</p>
+              </div>
+            </>
+          )}
         </div>
         <div className="mt-10">
           <Bar

@@ -1,24 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/images/Fincelerate Final logo.png';
 
 export default function Footer() {
   return (
     <div className="footer-gradient">
-      <div className="bg-gradient-to-t from-[#011C54] to-[#013DB3] pt-4 sm:pt-10 lg:pt-12">
+      <div className="bg-gradient-to-t from-[#013DB3] to-[#011C54] pt-4 sm:pt-10 lg:pt-12">
         <footer className="mx-auto max-w-screen-2xl px-4 md:px-8 text-white">
           <div className="mb-16 grid grid-cols-2 gap-12 border-t pt-10 md:grid-cols-4 lg:grid-cols-6 lg:gap-8 lg:pt-12">
             <div className="col-span-full lg:col-span-2">
               <div className="mb-4 lg:-mt-2">
                 <a href="/" className="inline-flex items-center gap-2 text-xl font-bold md:text-2xl" aria-label="logo">
-                  {/* <svg width="95" height="94" viewBox="0 0 95 94" className="h-auto w-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> */}
-                    <path d="M96 0V47L48 94H0V47L48 0H96Z" />
-                  {/* </svg> */}
-
-                  Ficelerate
+                  <img src={logo} alt="Fincelerate" className="h-36 w-auto" />
                 </a>
               </div>
 
-              <p className="mb-6 sm:pr-8">FORMERLY KNOWN AS “FINCELERATE SOLUTIONS PRIVATE LIMITED”</p>
+              <p className="mb-6 sm:pr-8 ">(FORMERLY KNOWN AS “FINCELERATE SOLUTIONS PRIVATE LIMITED”)</p>
 
               <div className="flex gap-4">
                 <a href="#" target="_blank" className="transition duration-100 hover:text-gray-300 active:text-gray-400">
@@ -64,23 +61,7 @@ export default function Footer() {
               </nav>
             </div>
 
-            <div>
-              <div className="mb-4 font-bold uppercase tracking-widest">Company</div>
-
-              <nav className="flex flex-col gap-4">
-                <div>
-                  <a href="#" className="transition duration-100 hover:text-gray-300 active:text-gray-400">About</a>
-                </div>
-
-                <div>
-                  <a href="/contactus" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Contact</a>
-                </div>
-
-                <div>
-                  <a href="#" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Blog</a>
-                </div>
-              </nav>
-            </div>
+            
 
             <div>
               <div className="mb-4 font-bold uppercase tracking-widest">Work Hours</div>
@@ -116,9 +97,34 @@ export default function Footer() {
 
               </nav>
             </div>
+            <div>
+              <div className="mb-4 font-bold uppercase tracking-widest">Company</div>
+
+              <nav className="flex flex-col gap-4">
+                <div>
+                  <a href="about" className="transition duration-100 hover:text-gray-300 active:text-gray-400">About</a>
+                </div>
+
+                <div>
+                  <a href="/contactus" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Contact</a>
+                </div>
+
+                <div>
+                  <a href="#" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Blog</a>
+                </div>
+              </nav>
+            </div>
           </div>
 
-          <div className="border-t py-8 text-center text-sm text-gray-400">© 2021 - Present Flowrift. All rights reserved.</div>
+          <div className="border-t py-8 text-center text-sm text-gray-400">
+            <p className="mt-4">Mutual Fund distributor with AMFI Registration number ARN: 189716</p>
+            <p className="mt-4">Fincelerate Private Limited CIN number: U66301KA2023PTC175585</p>
+            <p className="mt-4">Registered Office: 259, 14th Main, 27th Cross, Banashankari 2nd stage, Bengaluru, Karnataka 560070</p>
+          </div>
+
+          <div className="text-center text-sm text-gray-400">
+            <p className="mt-4">Disclaimer: Mutual fund investments are subject to market risks. Please read all scheme related documents carefully before investing. Past performance is not indicative of future returns. Please consider your specific investment requirements before choosing a fund, or designing a portfolio that suits your needs.</p>
+          </div>
         </footer>
       </div>
     </div>

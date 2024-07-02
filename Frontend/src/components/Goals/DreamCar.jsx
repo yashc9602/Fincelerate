@@ -30,7 +30,6 @@ export default function BuyYourDreamCar() {
       {
         label: 'Gains',
         data: [],
-        
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1,
@@ -149,71 +148,81 @@ export default function BuyYourDreamCar() {
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row justify-around items-center">
-          <div className="w-full md:w-1/2 p-2">
-            <Bar
-              data={graphData}
-              options={{
-                scales: {
-                  x: {
-                    title: {
-                      display: true,
-                      text: 'Years',
-                    },
-                  },
-                  y: {
-                    title: {
-                      display: true,
-                      text: 'Value (₹)',
-                    },
-                    beginAtZero: true,
-                    stacked: true,
-                  },
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  tooltip: {
-                    callbacks: {
-                      label: function (context) {
-                        const label = context.dataset.label || '';
-                        const value = context.raw || 0;
-                        return `${label}: ₹${value.toFixed(2)}`;
-                      },
-                    },
-                  },
-                },
-              }}
-            />
-          </div>
-          <div className="w-full md:w-1/2 p-2">
+        <div className="flex flex-col md:flex-row justify-around items-center mb-5">
+          <div className="w-full md:w-1/2 p-2 flex flex-col space-y-4">
             <div className="bg-white p-4 rounded-lg shadow-md text-center">
-              <h3 className="text-lg font-semibold">{investmentType === 'monthly' ? 'Invest Monthly' : 'Invest One-time'}</h3>
-              <p className="text-xl mt-4">Expected Value of the Car on {new Date(purchaseDate).toLocaleDateString()}</p>
+              <h3 className="text-lg font-semibold">Future Value of the Car</h3>
               <p className="text-2xl font-bold">{`₹ ${futureCarValue.toFixed(2)}`}</p>
-              <p className="text-xl mt-4">Number of Years to Invest:</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-md text-center">
+              <h3 className="text-lg font-semibold">Investment Duration</h3>
               <p className="text-2xl font-bold">{numberOfYears} years {numberOfMonths} months</p>
-              {investmentType === 'monthly' ? (
-                <>
-                  <p className="text-xl mt-4">SIP Amount Per Month:</p>
-                  <p className="text-2xl font-bold">{`₹ ${sipAmount.toFixed(2)}`}</p>
-                  <p className="text-xl mt-4">Expected Gains:</p>
-                  <p className="text-2xl font-bold">{`₹ ${(futureCarValue - sipAmount * (numberOfYears * 12 + numberOfMonths)).toFixed(2)}`}</p>
-                </>
-              ) : (
-                <>
-                  <p className="text-xl mt-4">Lumpsum Amount to be Invested:</p>
-                  <p className="text-2xl font-bold">{`₹ ${lumpsumAmount.toFixed(2)}`}</p>
-                  <p className="text-xl mt-4">Expected Gains:</p>
-                  <p className="text-2xl font-bold">{`₹ ${(futureCarValue - lumpsumAmount).toFixed(2)}`}</p>
-                </>
-              )}
             </div>
           </div>
+          <div className="w-full md:w-1/2 p-2 flex flex-col space-y-4">
+            {investmentType === 'monthly' ? (
+              <>
+                <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                  <h3 className="text-lg font-semibold">Monthly SIP Amount</h3>
+                  <p className="text-2xl font-bold">{`₹ ${sipAmount.toFixed(2)}`}</p>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                  <h3 className="text-lg font-semibold">Expected Gains</h3>
+                  <p className="text-2xl font-bold">{`₹ ${(futureCarValue - sipAmount * (numberOfYears * 12 + numberOfMonths)).toFixed(2)}`}</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                  <h3 className="text-lg font-semibold">Lumpsum Amount</h3>
+                  <p className="text-2xl font-bold">{`₹ ${lumpsumAmount.toFixed(2)}`}</p>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                  <h3 className="text-lg font-semibold">Expected Gains</h3>
+                  <p className="text-2xl font-bold">{`₹ ${(futureCarValue - lumpsumAmount).toFixed(2)}`}</p>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="w-full p-2">
+          <Bar
+            data={graphData}
+            options={{
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Years',
+                  },
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Value (₹)',
+                  },
+                  beginAtZero: true,
+                  stacked: true,
+                },
+              },
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      const label = context.dataset.label || '';
+                      const value = context.raw || 0;
+                      return `${label}: ₹${value.toFixed(2)}`;
+                    },
+                  },
+                },
+              },
+            }}
+          />
         </div>
       </div>
       <ButtonGroup />
     </div>
-    
   );
 }

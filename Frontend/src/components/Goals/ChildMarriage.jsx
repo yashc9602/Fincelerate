@@ -152,67 +152,76 @@ const ChildMarriageGoal = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row justify-around items-center">
-          <div className="w-full md:w-1/2 p-2 h-96">
-            <Bar
-              data={graphData}
-              options={{
-                scales: {
-                  x: {
-                    title: {
-                      display: true,
-                      text: 'Years',
-                    },
-                  },
-                  y: {
-                    title: {
-                      display: true,
-                      text: 'Value (₹)',
-                    },
-                    beginAtZero: true,
-                    stacked: true,
-                  },
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  tooltip: {
-                    callbacks: {
-                      label: function (context) {
-                        const label = context.dataset.label || '';
-                        const value = context.raw || 0;
-                        return `${label}: ₹${value.toFixed(2)}`;
-                      },
-                    },
-                  },
-                },
-              }}
-            />
-          </div>
-          <div className="w-full md:w-1/2 p-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div>
             <div className="bg-white p-4 rounded-lg shadow-md text-center">
-              <h3 className="text-lg font-semibold">{investmentType === 'monthly' ? 'Invest Monthly' : 'Invest One-time'}</h3>
-              <p className="text-xl mt-4">Expected Value at Age {withdrawalAge}</p>
+              <h3 className="text-lg font-semibold">Future Value at Age {withdrawalAge}</h3>
               <p className="text-2xl font-bold">{`₹ ${futureValue.toFixed(2)}`}</p>
-              <p className="text-xl mt-4">Number of Years to Invest:</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-md text-center mt-4">
+              <h3 className="text-lg font-semibold">Investment Duration</h3>
               <p className="text-2xl font-bold">{numberOfYears} years {numberOfMonths % 12} months</p>
-              {investmentType === 'monthly' ? (
-                <>
-                  <p className="text-xl mt-4">SIP Amount Per Month:</p>
-                  <p className="text-2xl font-bold">{`₹ ${sipAmount.toFixed(2)}`}</p>
-                  <p className="text-xl mt-4">Expected Gains:</p>
-                  <p className="text-2xl font-bold">{`₹ ${(futureValue - sipAmount * numberOfMonths).toFixed(2)}`}</p>
-                </>
-              ) : (
-                <>
-                  <p className="text-xl mt-4">Lumpsum Amount to be Invested:</p>
-                  <p className="text-2xl font-bold">{`₹ ${lumpsumAmount.toFixed(2)}`}</p>
-                  <p className="text-xl mt-4">Expected Gains:</p>
-                  <p className="text-2xl font-bold">{`₹ ${(futureValue - lumpsumAmount).toFixed(2)}`}</p>
-                </>
-              )}
             </div>
           </div>
+          {investmentType === 'monthly' ? (
+            <div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                <h3 className="text-lg font-semibold">Monthly SIP Amount</h3>
+                <p className="text-2xl font-bold">{`₹ ${sipAmount.toFixed(2)}`}</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center mt-4">
+                <h3 className="text-lg font-semibold">Expected Gains</h3>
+                <p className="text-2xl font-bold">{`₹ ${(futureValue - sipAmount * numberOfMonths).toFixed(2)}`}</p>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                <h3 className="text-lg font-semibold">Lumpsum Amount to be Invested</h3>
+                <p className="text-2xl font-bold">{`₹ ${lumpsumAmount.toFixed(2)}`}</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center mt-4">
+                <h3 className="text-lg font-semibold">Expected Gains</h3>
+                <p className="text-2xl font-bold">{`₹ ${(futureValue - lumpsumAmount).toFixed(2)}`}</p>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="mt-10">
+          <Bar
+            data={graphData}
+            options={{
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Years',
+                  },
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Value (₹)',
+                  },
+                  beginAtZero: true,
+                  stacked: true,
+                },
+              },
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      const label = context.dataset.label || '';
+                      const value = context.raw || 0;
+                      return `${label}: ₹${value.toFixed(2)}`;
+                    },
+                  },
+                },
+              },
+            }}
+          />
         </div>
       </div>
     </div>

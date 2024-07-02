@@ -1,199 +1,227 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
-import 'tailwindcss/tailwind.css';
 
 const PlanYourRetirement = () => {
   const [currentAge, setCurrentAge] = useState(30);
   const [retirementAge, setRetirementAge] = useState(60);
-  const [investmentAmount, setInvestmentAmount] = useState(0);
-  const [retirementCorpus, setRetirementCorpus] = useState(10000000);
-  const [expectedGrowthRate, setExpectedGrowthRate] = useState(10);
-  const [useInvestmentAmount, setUseInvestmentAmount] = useState(true);
+  const [corpusAmount, setCorpusAmount] = useState(10000000);
+  const [growthRate, setGrowthRate] = useState(10);
+  const [investmentType, setInvestmentType] = useState('monthly');
 
-  const calculateRetirement = () => {
-    const yearsToInvest = retirementAge - currentAge;
-    const monthsToInvest = yearsToInvest * 12;
-    const monthlyRate = (expectedGrowthRate / 100) / 12;
-
-    let SIPAmount = 0;
-    let corpusNeeded = 0;
-
-    if (useInvestmentAmount) {
-      corpusNeeded = retirementCorpus;
-      SIPAmount = (corpusNeeded * monthlyRate) / (Math.pow(1 + monthlyRate, monthsToInvest) - 1);
-    } else {
-      corpusNeeded = investmentAmount * Math.pow(1 + monthlyRate, monthsToInvest);
-    }
-
-    return {
-      corpusNeeded: corpusNeeded.toFixed(2),
-      SIPAmount: useInvestmentAmount ? SIPAmount.toFixed(2) : investmentAmount.toFixed(2),
-      yearsToInvest: yearsToInvest.toFixed(1),
-    };
-  };
-
-  const results = calculateRetirement();
-
-  const chartData = {
-    labels: Array.from({ length: results.yearsToInvest }, (_, i) => `Year ${i + 1}`),
+  const [futureValue, setFutureValue] = useState(0);
+  const [sipAmount, setSipAmount] = useState(0);
+  const [lumpsumAmount, setLumpsumAmount] = useState(0);
+  const [numberOfMonths, setNumberOfMonths] = useState(0);
+  const [numberOfYears, setNumberOfYears] = useState(0);
+  const [graphData, setGraphData] = useState({
+    labels: [],
     datasets: [
       {
         label: 'Invested Amount',
-        data: Array.from({ length: results.yearsToInvest }, (_, i) => {
-          if (useInvestmentAmount) {
-            const year = i + 1;
-            return results.SIPAmount * 12 * year;
-          } else {
-            return results.corpusNeeded;
-          }
-        }),
+        data: [],
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
-        stack: 'combined',
       },
       {
         label: 'Gains',
-        data: Array.from({ length: results.yearsToInvest }, (_, i) => {
-          const year = i + 1;
-          if (useInvestmentAmount) {
-            const investedAmount = results.SIPAmount * 12 * year;
-            return (investedAmount * Math.pow(1 + (expectedGrowthRate / 100), year)) - investedAmount;
-          } else {
-            return results.corpusNeeded * (Math.pow(1 + (expectedGrowthRate / 100), year) - 1);
-          }
-        }),
+        data: [],
         backgroundColor: 'rgba(54, 162, 235, 0.6)',
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1,
-        stack: 'combined',
       },
     ],
-  };
+  });
+
+  useEffect(() => {
+    const calculateRetirementPlan = () => {
+      const yearsToInvest = retirementAge - currentAge;
+      const monthsToInvest = yearsToInvest * 12;
+      const monthlyRate = growthRate / 100 / 12;
+      const annualRate = growthRate / 100;
+
+      const futureValueCalculated = corpusAmount * Math.pow(1 + annualRate, yearsToInvest);
+      setFutureValue(futureValueCalculated);
+      setNumberOfMonths(monthsToInvest);
+      setNumberOfYears(yearsToInvest);
+
+      const sip = futureValueCalculated * monthlyRate / (Math.pow(1 + monthlyRate, monthsToInvest) - 1);
+      setSipAmount(sip);
+
+      const lumpsum = futureValueCalculated / Math.pow(1 + annualRate, yearsToInvest);
+      setLumpsumAmount(lumpsum);
+
+      const graphPoints = Array.from({ length: yearsToInvest + 1 }, (_, i) => {
+        const currentYear = i + 1;
+        const sipInvestment = sip * 12 * currentYear;
+        const lumpsumInvestment = lumpsum * Math.pow(1 + annualRate, currentYear);
+        const totalInvested = sipInvestment;
+        const gains = sipInvestment * Math.pow(1 + monthlyRate, currentYear * 12) - sipInvestment;
+
+        return {
+          year: currentYear,
+          totalInvested,
+          gains,
+        };
+      });
+
+      setGraphData({
+        labels: graphPoints.map(point => `Year ${point.year}`),
+        datasets: [
+          {
+            label: 'Invested Amount',
+            data: graphPoints.map(point => (investmentType === 'monthly' ? point.totalInvested : lumpsum)),
+            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            stack: 'combined',
+          },
+          {
+            label: 'Gains',
+            data: graphPoints.map(point => (investmentType === 'monthly' ? point.gains : point.gains)),
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            stack: 'combined',
+          },
+        ],
+      });
+    };
+
+    calculateRetirementPlan();
+  }, [currentAge, retirementAge, corpusAmount, growthRate, investmentType]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg p-8">
-        <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">Plan Your Retirement</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div>
-            <label className="block text-gray-700 font-semibold mb-2">Your Current Age</label>
+    <div className="container mx-auto p-5 max-w-4xl">
+      <div className="bg-gray-100 p-5 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold text-center mb-5">Plan Your Retirement</h2>
+        <div className="flex justify-center mb-5">
+          <button
+            className={`px-4 py-2 rounded-l-lg ${investmentType === 'monthly' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+            onClick={() => setInvestmentType('monthly')}
+          >
+            Invest Monthly
+          </button>
+          <button
+            className={`px-4 py-2 rounded-r-lg ${investmentType === 'onetime' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+            onClick={() => setInvestmentType('onetime')}
+          >
+            Invest One-time
+          </button>
+        </div>
+        <div className="flex flex-col md:flex-row justify-around items-center mb-5">
+          <div className="w-full md:w-1/4 p-2">
+            <label className="block text-gray-700 mb-2">Your Current Age</label>
             <input
               type="number"
+              min="0"
               value={currentAge}
               onChange={(e) => setCurrentAge(Number(e.target.value))}
               className="w-full p-2 border rounded"
             />
           </div>
-          <div>
-            <label className="block text-gray-700 font-semibold mb-2">Retirement Age</label>
+          <div className="w-full md:w-1/4 p-2">
+            <label className="block text-gray-700 mb-2">Retirement Age</label>
             <input
               type="number"
+              min="0"
               value={retirementAge}
               onChange={(e) => setRetirementAge(Number(e.target.value))}
               className="w-full p-2 border rounded"
             />
           </div>
-          <div className="col-span-2">
-            <label className="block text-gray-700 font-semibold mb-2">Do you know how much you can invest towards retirement?</label>
-            <div className="flex items-center">
-              <input
-                type="radio"
-                name="investmentOption"
-                value="investAmount"
-                checked={useInvestmentAmount}
-                onChange={() => setUseInvestmentAmount(true)}
-                className="mr-2"
-              />
-              <label className="mr-4">I know how much I can invest</label>
-              <input
-                type="radio"
-                name="investmentOption"
-                value="corpusAmount"
-                checked={!useInvestmentAmount}
-                onChange={() => setUseInvestmentAmount(false)}
-                className="mr-2"
-              />
-              <label>I have a retirement corpus amount in mind</label>
-            </div>
-          </div>
-          {useInvestmentAmount ? (
-            <div className="col-span-2">
-              <label className="block text-gray-700 font-semibold mb-2">I wish to save ₹</label>
-              <input
-                type="number"
-                value={retirementCorpus}
-                onChange={(e) => setRetirementCorpus(Number(e.target.value))}
-                className="w-full p-2 border rounded"
-              />
-            </div>
-          ) : (
-            <div className="col-span-2">
-              <label className="block text-gray-700 font-semibold mb-2">Monthly Investment Amount (₹)</label>
-              <input
-                type="number"
-                value={investmentAmount}
-                onChange={(e) => setInvestmentAmount(Number(e.target.value))}
-                className="w-full p-2 border rounded"
-              />
-            </div>
-          )}
-          <div className="col-span-2">
-            <label className="block text-gray-700 font-semibold mb-2">Expected Growth Rate of Your Investment (% p.a.)</label>
+          <div className="w-full md:w-1/4 p-2">
+            <label className="block text-gray-700 mb-2">Corpus Amount (₹)</label>
             <input
               type="number"
-              value={expectedGrowthRate}
-              onChange={(e) => setExpectedGrowthRate(Number(e.target.value))}
+              min="0"
+              value={corpusAmount}
+              onChange={(e) => setCorpusAmount(Number(e.target.value))}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          <div className="w-full md:w-1/4 p-2">
+            <label className="block text-gray-700 mb-2">Expected Growth Rate (%)</label>
+            <input
+              type="number"
+              min="0"
+              value={growthRate}
+              onChange={(e) => setGrowthRate(Number(e.target.value))}
               className="w-full p-2 border rounded"
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div>
-            <h3 className="text-2xl font-semibold mb-4">Investment Plan</h3>
-            <p className="mb-2">Effective Corpus Needed: ₹{results.corpusNeeded}</p>
-            <p className="mb-2">Monthly Amount to be Invested:</p>
-            <p className="text-lg font-semibold mb-2">₹{results.SIPAmount}</p>
-            <p className="mb-2">Number of Years to Invest:</p>
-            <p className="text-lg font-semibold mb-2">{results.yearsToInvest}</p>
+            <div className="bg-white p-4 rounded-lg shadow-md text-center">
+              <h3 className="text-lg font-semibold">Future Value at Retirement Age</h3>
+              <p className="text-2xl font-bold">{`₹ ${futureValue.toFixed(2)}`}</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-md text-center mt-4">
+              <h3 className="text-lg font-semibold">Investment Duration</h3>
+              <p className="text-2xl font-bold">{numberOfYears} years {numberOfMonths % 12} months</p>
+            </div>
           </div>
-          <div className="h-96 w-full">
-            <Bar
-              data={chartData}
-              options={{
-                scales: {
-                  x: {
-                    title: {
-                      display: true,
-                      text: 'Years',
-                    },
-                  },
-                  y: {
-                    title: {
-                      display: true,
-                      text: 'Value (₹)',
-                    },
-                    beginAtZero: true,
-                    stacked: true,
+          {investmentType === 'monthly' ? (
+            <div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                <h3 className="text-lg font-semibold">Monthly SIP Amount</h3>
+                <p className="text-2xl font-bold">{`₹ ${sipAmount.toFixed(2)}`}</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center mt-4">
+                <h3 className="text-lg font-semibold">Expected Gains</h3>
+                <p className="text-2xl font-bold">{`₹ ${(futureValue - sipAmount * numberOfMonths).toFixed(2)}`}</p>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center">
+                <h3 className="text-lg font-semibold">Lumpsum Amount to be Invested</h3>
+                <p className="text-2xl font-bold">{`₹ ${lumpsumAmount.toFixed(2)}`}</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md text-center mt-4">
+                <h3 className="text-lg font-semibold">Expected Gains</h3>
+                <p className="text-2xl font-bold">{`₹ ${(futureValue - lumpsumAmount).toFixed(2)}`}</p>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="w-full p-2 h-96 md:h-[50vh]">
+          <Bar
+            data={graphData}
+            options={{
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Years',
                   },
                 },
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  tooltip: {
-                    callbacks: {
-                      label: function (context) {
-                        const label = context.dataset.label || '';
-                        const value = context.raw || 0;
-                        return `${label}: ₹${value.toFixed(2)}`;
-                      },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Value (₹)',
+                  },
+                  beginAtZero: true,
+                  stacked: true,
+                },
+              },
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      const label = context.dataset.label || '';
+                      const value = context.raw || 0;
+                      return `${label}: ₹${value.toFixed(2)}`;
                     },
                   },
                 },
-              }}
-            />
-          </div>
+              },
+            }}
+          />
         </div>
       </div>
     </div>
