@@ -110,7 +110,7 @@ export default function Footer() {
                 </div>
 
                 <div>
-                  <a href="#" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Blog</a>
+                  <a href="/blogs" className="transition duration-100 hover:text-gray-300 active:text-gray-400">Blog</a>
                 </div>
               </nav>
             </div>
