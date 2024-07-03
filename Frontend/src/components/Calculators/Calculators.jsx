@@ -5,8 +5,8 @@ import {
   CalculatorIcon, 
   ChartBarIcon, 
   ArrowsRightLeftIcon, 
-  CurrencyDollarIcon, 
-  ArrowUpIcon 
+  ArrowUpIcon, 
+  CurrencyRupeeIcon
 } from '@heroicons/react/24/outline';
 import useScrollToTop from '../useScrollToTop';
 
@@ -14,7 +14,7 @@ const calculators = [
   { name: 'SIP Calculator', path: '/sipcalculator', icon: CalculatorIcon },
   { name: 'Lumpsum Calculator', path: '/lumpsumcalculator', icon: ChartBarIcon },
   { name: 'STP Calculator', path: '/stpcalculator', icon: ArrowsRightLeftIcon },
-  { name: 'SWP Calculator', path: '/swpcalculator', icon: CurrencyDollarIcon },
+  { name: 'SWP Calculator', path: '/swpcalculator', icon: CurrencyRupeeIcon },
   { name: 'SIP Step Up Calculator', path: '/stepupsipcalculator', icon: ArrowUpIcon },
 ];
 
