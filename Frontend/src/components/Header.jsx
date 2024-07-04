@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/authReducer';
-import logo from '../assets/images/Fincelerate Final logo.png';
+import logo from '../assets/images/fincelerate_logo_nav.png';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,8 +51,7 @@ export default function Header() {
       <div className="container mx-auto flex justify-between items-center p-5">
         <div className="flex items-center">
           <Link to="/" className="flex title-font font-medium items-center text-gray-900" onClick={closeMenu}>
-            <img src={logo} alt="Fincelerate" className="h-8 w-auto" />
-            <span className="ml-3 text-xl">Fincelerate</span>
+            <img src={logo} alt="Fincelerate" className="h-10 w-auto" />
           </Link>
         </div>
         <button
@@ -73,7 +72,7 @@ export default function Header() {
           className={`${isOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row items-center text-base justify-center absolute md:static top-full right-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none`}
         >
           <Link to="/about" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu}>About Us</Link>
-          <Link to="/eyourself" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>E Yourself</Link>
+          
           <div className="relative">
             <button
               className="py-2 px-2 w-full text-center md:py-0 md:px-3 flex items-center justify-between"
@@ -115,7 +114,7 @@ export default function Header() {
                   Invest
                 </Link>
                 <Link
-                  to="/explore-funds"
+                  to="/comingsoon"
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                   onClick={closeMenu}
                 >
@@ -124,6 +123,7 @@ export default function Header() {
               </div>
             )}
           </div>
+          <Link to="/eyourself" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>E Yourself</Link>
           <Link to="/contactus" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>Contact Us</Link>
         </nav>
         {isAuthenticated ? (

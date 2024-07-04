@@ -41,7 +41,7 @@ const Home = () => {
 
                 <div className="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start">
                   <Link
-                    to="/contactus"
+                    to="/comingsoon"
                     className="inline-block rounded-lg bg-[#041D4C] px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-gray-200 hover:text-black focus-visible:ring active:bg-indigo-700 md:text-base"
                   >
                     Invest

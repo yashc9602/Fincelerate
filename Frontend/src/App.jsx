@@ -36,6 +36,7 @@ import Calendly from "./components/Appointment";
 import ContactUsPage from "./components/ContactUs";
 import ContactForm from "./components/Contact";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ComingSoonPage from "./components/ComingSoon";
 
 function App() {
   const dispatch = useDispatch();
@@ -79,6 +80,7 @@ function App() {
         <Route path="/carousel" element={<Carousel />} />
         <Route path="/blogs" element={<Blog />} />
         <Route path="/contactus" element={<ContactUsPage />} />
+        <Route path="/comingsoon" element={<ComingSoonPage />} />
 
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
           <Route path="/profile" element={<ProfileForm />} />
