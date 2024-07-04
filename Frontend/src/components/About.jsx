@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import AboutUs1 from "./About1";
+import useScrollToTop from "./useScrollToTop";
 
 export default function About() {
+  useScrollToTop();
   const [showModal, setShowModal] = useState(false);
 
   const handleLearnMoreClick = () => {

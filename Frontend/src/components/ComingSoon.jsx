@@ -1,6 +1,8 @@
 import React from 'react';
+import useScrollToTop from './useScrollToTop';
 
 const ComingSoonPage = () => {
+  useScrollToTop();
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600">
       <div className="text-center px-6 py-8 bg-white rounded-lg shadow-lg max-w-lg mx-auto">
