@@ -11,6 +11,7 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState("query");
   const [showNotification, setShowNotification] = useState(false);
   const navigate = useNavigate();
+  useScrollToTop();
 
   useEffect(() => {
     const timer = setTimeout(() => {
