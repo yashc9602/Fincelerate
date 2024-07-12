@@ -3,18 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
 import { 
   AcademicCapIcon, 
-  BuildingOffice2Icon,
-  CurrencyDollarIcon, 
+  CurrencyRupeeIcon, 
   HomeIcon, 
   HeartIcon, 
   UserGroupIcon 
 } from '@heroicons/react/24/outline';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCar } from '@fortawesome/free-solid-svg-icons';
 import useScrollToTop from '../useScrollToTop';
 
 const goals = [
-  { name: 'Buy Your Dream Car', path: '/dreamcar', icon: BuildingOffice2Icon },
+  { name: 'Buy Your Dream Car', path: '/dreamcar', icon: () => <FontAwesomeIcon icon={faCar} className="h-20 w-20 text-gray-700" /> },
   { name: 'Buy Your Dream House', path: '/dreamhouse', icon: HomeIcon },
-  { name: 'Build Your Corpus', path: '/corpus', icon: CurrencyDollarIcon },
+  { name: 'Build Your Corpus', path: '/corpus', icon: CurrencyRupeeIcon },
   { name: "Plan Your Child's Education", path: '/childeducation', icon: AcademicCapIcon },
   { name: "Plan Your Child's Marriage", path: '/childmarriage', icon: HeartIcon },
   { name: 'Plan Your Retirement', path: '/retirementcalculator', icon: UserGroupIcon },
@@ -39,7 +40,7 @@ const GoalsPage = () => {
             onClick={() => navigateToGoal(goal.path)}
           >
             <div className="flex items-center justify-center h-40 bg-gray-200">
-              <goal.icon className="h-20 w-20 text-gray-700" />
+              {typeof goal.icon === 'function' ? goal.icon() : <goal.icon className="h-20 w-20 text-gray-700" />}
             </div>
             <div className="p-4">
               <h2 className="text-2xl font-semibold text-gray-800">{goal.name}</h2>

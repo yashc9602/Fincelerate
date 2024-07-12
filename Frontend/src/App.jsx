@@ -37,6 +37,8 @@ import ContactUsPage from "./components/ContactUs";
 import ContactForm from "./components/Contact";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ComingSoonPage from "./components/ComingSoon";
+import Layout from "./components/Layout";
+import SocialMediaSidebar from "./components/SocialMediaSidebar"; // Import the new component
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +55,7 @@ function App() {
   return (
     <div>
       <Header />
+      <SocialMediaSidebar /> {/* Add the component here */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Signin />} />
@@ -79,13 +82,13 @@ function App() {
         <Route path="/aboutus" element={<AboutUs1 />} />
         <Route path="/carousel" element={<Carousel />} />
         <Route path="/blogs" element={<Blog />} />
-        <Route path="/contactus" element={<ContactUsPage />} />
         <Route path="/comingsoon" element={<ComingSoonPage />} />
 
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
           <Route path="/profile" element={<ProfileForm />} />
           <Route path="/profile/view" element={<ProfileView />} />
           <Route path="/profile/edit" element={<ProfileEdit />} />
+          <Route path="/contactus" element={<ContactUsPage />} />
         </Route>
       </Routes>
       <Footer />

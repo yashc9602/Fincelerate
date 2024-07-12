@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/authReducer';
@@ -7,16 +7,26 @@ import logo from '../assets/images/fincelerate_logo_nav.png';
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleLogout = () => {
-    // Clear local storage
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    // Dispatch logout action
     dispatch(logout());
     setIsOpen(false);
   };
@@ -125,9 +135,34 @@ export default function Header() {
           </div>
           <Link to="/eyourself" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>E Yourself</Link>
           <Link to="/contactus" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>Contact Us</Link>
+          {isMobile && isAuthenticated && (
+            <>
+              <button
+                onClick={handleProfileClick}
+                className="py-2 px-2 w-full text-center md:py-0 md:px-3 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+              >
+                Profile
+              </button>
+              <button
+                onClick={handleLogout}
+                className="py-2 px-2 w-full text-center md:py-0 md:px-3 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+              >
+                Signout
+              </button>
+            </>
+          )}
+          {!isAuthenticated && (
+            <Link
+              to="/signin"
+              className="py-2 px-2 w-full text-center md:py-0 md:px-3 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+              onClick={closeMenu}
+            >
+              Signin
+            </Link>
+          )}
         </nav>
-        {isAuthenticated ? (
-          <div className="flex items-center space-x-4">
+        {isAuthenticated && !isMobile && (
+          <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={handleProfileClick}
               className="bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
@@ -136,7 +171,7 @@ export default function Header() {
             </button>
             <button
               onClick={handleLogout}
-              className="hidden md:inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+              className="md:inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
             >
               Signout
               <svg
@@ -152,25 +187,6 @@ export default function Header() {
               </svg>
             </button>
           </div>
-        ) : (
-          <Link
-            to="/signin"
-            className="hidden md:inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-            onClick={closeMenu}
-          >
-            Signin
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-4 h-4 ml-1"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </Link>
         )}
       </div>
     </header>
