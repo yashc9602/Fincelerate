@@ -25,7 +25,7 @@ export default function ProfileForm() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token') // Ensure Bearer is included
+        'Authorization': `Bearer ${localStorage.getItem('token')}` // Ensure Bearer is included
       }
     })
     .then(response => response.json())
@@ -40,12 +40,26 @@ export default function ProfileForm() {
     const { name, value, type, checked } = e.target;
     if (type === 'checkbox') {
       if (checked) {
-        setFormData({ ...formData, investmentOptions: [...formData.investmentOptions, value] });
+        setFormData(prevState => ({
+          ...prevState,
+          investmentOptions: [...prevState.investmentOptions, value]
+        }));
       } else {
-        setFormData({ ...formData, investmentOptions: formData.investmentOptions.filter(option => option !== value) });
+        setFormData(prevState => ({
+          ...prevState,
+          investmentOptions: prevState.investmentOptions.filter(option => option !== value)
+        }));
       }
+    } else if (type === 'radio') {
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
     } else {
-      setFormData({ ...formData, [name]: value });
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
     }
   };
 
@@ -55,7 +69,7 @@ export default function ProfileForm() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token') // Ensure Bearer is included
+        'Authorization': `Bearer ${localStorage.getItem('token')}` // Ensure Bearer is included
       },
       body: JSON.stringify(formData)
     })

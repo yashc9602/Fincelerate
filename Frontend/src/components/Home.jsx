@@ -90,7 +90,7 @@ const Home = () => {
             </div>
             <div className="order-start h-48 w-full bg-[#041D4C] sm:order-none sm:h-auto sm:w-1/2 lg:w-1/2">
               <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-96">
-                <p className="mb-8 max-w-md text-gray-100">
+                <p className="mb-8 max-w-md text-gray-100 text-lg">
                   Our services include comprehensive financial planning,
                   investment management, retirement planning, tax planning, and
                   more. We provide customized solutions that cater to your
