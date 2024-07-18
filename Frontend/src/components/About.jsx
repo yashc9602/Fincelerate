@@ -27,7 +27,7 @@ export default function About() {
             </div>
             <div className="w-full lg:w-1/2 mt-6 lg:mt-24">
               <p className="text-lg leading-relaxed text-gray-500">
-                At Fincelerate, we're dedicated to enhancing your financial health through expert guidance and innovative resources. Whether you're assessing your current financial state, planning investments, or striving to achieve specific goals, our team of advisors—comprising both human experts and advanced AI—stands ready to assist you. Dive into the world of finance through our engaging podcasts, webinars, and educational content, designed to empower you with the knowledge and discipline needed for financial success.
+                At Fincelerate, we're dedicated to enhancing your financial health through innovative resources. Whether you're assessing your current financial state, planning investments, or striving to achieve specific goals, our team of financial experts—comprising both human experts and advanced AI—stands ready to assist you. Dive into the world of finance through our engaging podcasts, webinars, and educational content, designed to empower you with the knowledge and discipline needed for financial success.
               </p>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function About() {
             </div>
             <div className="bg-gray-100 rounded-lg p-6 shadow-lg text-center">
               <h3 className="text-2xl font-semibold text-[#041D4C] mb-4">Teach</h3>
-              <p className="text-lg text-gray-500">Our advisors provide expert guidance to help you succeed financially.</p>
+              <p className="text-lg text-gray-500">Our financial experts provide valuable insights to help you succeed financially.</p>
             </div>
             <div className="bg-gray-100 rounded-lg p-6 shadow-lg text-center">
               <h3 className="text-2xl font-semibold text-[#041D4C] mb-4">Reach</h3>
@@ -103,7 +103,7 @@ export default function About() {
           <div className="flex flex-col items-center mb-12 mt-24">
             <h2 className="text-4xl font-semibold text-[#041D4C] mb-4 w-full lg:w-1/2 text-center">What We Do?</h2>
             <p className="text-lg leading-relaxed text-gray-600 w-full lg:w-4/5 text-center">
-              Our journey began with a deep-rooted fascination for wealth and investing. This passion evolved into Fincelerate, where we provide comprehensive financial advisory services. Our aim is clear: to guide individuals from diverse backgrounds towards financial prosperity and independence. Central to our approach is understanding the power of compounding through mutual funds, leveraging both research and seasoned expertise to unlock its benefits.
+              Our journey began with a deep-rooted fascination for wealth and investing. This passion evolved into Fincelerate, where we provide comprehensive financial services. Our aim is clear: to motivate individuals from diverse backgrounds towards financial prosperity and independence. Central to our approach is understanding the power of compounding through mutual funds, leveraging both research and seasoned expertise to unlock its benefits.
             </p>
           </div>
 

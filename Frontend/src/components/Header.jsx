@@ -57,35 +57,35 @@ export default function Header() {
   };
 
   return (
-    <header className="text-gray-800 body-font sticky top-0 bg-white z-10">
+    <header className="text-gray-600 body-font sticky top-0 bg-white z-10">
       <div className="container mx-auto flex justify-between items-center p-5">
         <div className="flex items-center">
           <Link to="/" className="flex title-font font-medium items-center text-gray-900" onClick={closeMenu}>
-            <img src={logo} alt="Fincelerate" className="h-12 w-auto" />
+            <img src={logo} alt="Fincelerate" className="h-10 w-auto" />
           </Link>
         </div>
         <button
-          className="md:hidden flex items-center text-gray-900"
+          className="md:hidden flex items-center text-gray-900 "
           onClick={toggleMenu}
         >
           {isOpen ? (
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           )}
         </button>
         <nav
-          className={`${isOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row items-center text-lg justify-center absolute md:static top-full right-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none`}
+          className={`${isOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row items-center text-base justify-center absolute md:static top-full right-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none`}
         >
-          <Link to="/about" className="py-2 px-2 w-full text-center md:py-0 md:px-4 text-gray-900" onClick={closeMenu}>About Us</Link>
+          <Link to="/about" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu}>About Us</Link>
           
           <div className="relative">
             <button
-              className="py-2 px-2 w-full text-center md:py-0 md:px-4 flex items-center justify-between text-gray-800"
+              className="py-2 px-2 w-full text-center md:py-0 md:px-3 flex items-center justify-between"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               style={{ whiteSpace: 'nowrap' }}
             >
@@ -117,7 +117,7 @@ export default function Header() {
                   Goals
                 </Link>
                 <Link
-                  to="/invest"
+                  to="/comingsoon"
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                   onClick={closeMenu}
                 >
@@ -133,19 +133,19 @@ export default function Header() {
               </div>
             )}
           </div>
-          <Link to="/eyourself" className="py-2 px-2 w-full text-center md:py-0 md:px-4 text-gray-800" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>E Yourself</Link>
-          <Link to="/contactus" className="py-2 px-2 w-full text-center md:py-0 md:px-4 text-gray-800" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>Contact Us</Link>
+          <Link to="/eyourself" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>E Yourself</Link>
+          <Link to="/contactus" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>Contact Us</Link>
           {isMobile && isAuthenticated && (
             <>
               <button
                 onClick={handleProfileClick}
-                className="py-2 px-2 w-full text-center md:py-0 md:px-4 text-gray-800 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0"
+                className="py-2 px-2 w-full text-center md:py-0 md:px-3 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
               >
                 Profile
               </button>
               <button
                 onClick={handleLogout}
-                className="py-2 px-2 w-full text-center md:py-0 md:px-4 text-gray-800 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0"
+                className="py-2 px-2 w-full text-center md:py-0 md:px-3 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
               >
                 Signout
               </button>
@@ -154,7 +154,7 @@ export default function Header() {
           {!isAuthenticated && (
             <Link
               to="/signin"
-              className="py-2 px-2 w-full text-center md:py-0 md:px-4 text-gray-800 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0"
+              className="py-2 px-2 w-full text-center md:py-0 md:px-3 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
               onClick={closeMenu}
             >
               Signin
@@ -165,13 +165,13 @@ export default function Header() {
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={handleProfileClick}
-              className="bg-gray-100 border-0 py-2 px-4 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0 text-gray-800"
+              className="bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
             >
               Profile
             </button>
             <button
               onClick={handleLogout}
-              className="md:inline-flex items-center bg-gray-100 border-0 py-2 px-4 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0 text-gray-800"
+              className="md:inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
             >
               Signout
               <svg

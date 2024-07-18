@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import ContactForm from './Contact';
 import Calendly from './Appointment';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 
 const ContactUsPage = () => {
   const [activeTab, setActiveTab] = useState('query');
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const navigate = useNavigate();
 
   const handleTabClick = (tab) => {
-    setActiveTab(tab);
+    if (tab === 'appointment' && !isAuthenticated) {
+      navigate('/signin');
+    } else {
+      setActiveTab(tab);
+    }
   };
 
   return (

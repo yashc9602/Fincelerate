@@ -38,7 +38,8 @@ import ContactForm from "./components/Contact";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ComingSoonPage from "./components/ComingSoon";
 import Layout from "./components/Layout";
-import SocialMediaSidebar from "./components/SocialMediaSidebar"; // Import the new component
+import Notification from "./components/Notification"; // Import the notification component
+import SocialMediaSidebar from "./components/SocialMediaSidebar";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,42 +56,45 @@ function App() {
   return (
     <div>
       <Header />
-      <SocialMediaSidebar /> {/* Add the component here */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/contact" element={<ContactForm />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/sipcalculator" element={<SIPCalculator />} />
-        <Route path="/lumpsumcalculator" element={<LumpsumCalculator />} />
-        <Route path="/stepupsipcalculator" element={<StepUpSIPCalculator />} />
-        <Route path="/swpcalculator" element={<SWPCalculator />} />
-        <Route path="/stpcalculator" element={<STPCalculator />} />
-        <Route path="/dreamcar" element={<BuyDreamCar />} />
-        <Route path="/dreamhouse" element={<DreamHouseGoal />} />
-        <Route path="/childplan" element={<ChildEducationGoal />} />
-        <Route path="/childmarriage" element={<ChildMarriageGoal />} />
-        <Route path="/corpus" element={<BuildYourCorpus />} />
-        <Route path="/planyourgoal" element={<PlanYourGoal />} />
-        <Route path="/retirementcalculator" element={<PlanYourRetirement />} />
-        <Route path="/goals" element={<GoalsPage />} />
-        <Route path="/childeducation" element={<PlanYourChildEducation />} />
-        <Route path="/calculators" element={<CalculatorsPage />} />
-        <Route path="/eyourself" element={<ExploreYourself />} />
-        <Route path="/aboutus" element={<AboutUs1 />} />
-        <Route path="/carousel" element={<Carousel />} />
-        <Route path="/blogs" element={<Blog />} />
-        <Route path="/comingsoon" element={<ComingSoonPage />} />
-
-        <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-          <Route path="/profile" element={<ProfileForm />} />
-          <Route path="/profile/view" element={<ProfileView />} />
-          <Route path="/profile/edit" element={<ProfileEdit />} />
+      <SocialMediaSidebar /> 
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/contact" element={<ContactForm />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/sipcalculator" element={<SIPCalculator />} />
+          <Route path="/lumpsumcalculator" element={<LumpsumCalculator />} />
+          <Route path="/stepupsipcalculator" element={<StepUpSIPCalculator />} />
+          <Route path="/swpcalculator" element={<SWPCalculator />} />
+          <Route path="/stpcalculator" element={<STPCalculator />} />
+          <Route path="/dreamcar" element={<BuyDreamCar />} />
+          <Route path="/dreamhouse" element={<DreamHouseGoal />} />
+          <Route path="/childplan" element={<ChildEducationGoal />} />
+          <Route path="/childmarriage" element={<ChildMarriageGoal />} />
+          <Route path="/corpus" element={<BuildYourCorpus />} />
+          <Route path="/planyourgoal" element={<PlanYourGoal />} />
+          <Route path="/retirementcalculator" element={<PlanYourRetirement />} />
+          <Route path="/goals" element={<GoalsPage />} />
+          <Route path="/childeducation" element={<PlanYourChildEducation />} />
+          <Route path="/calculators" element={<CalculatorsPage />} />
+          <Route path="/eyourself" element={<ExploreYourself />} />
+          <Route path="/aboutus" element={<AboutUs1 />} />
+          <Route path="/carousel" element={<Carousel />} />
+          <Route path="/blogs" element={<Blog />} />
+          <Route path="/comingsoon" element={<ComingSoonPage />} />
           <Route path="/contactus" element={<ContactUsPage />} />
-        </Route>
-      </Routes>
+
+          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+            <Route path="/profile" element={<ProfileForm />} />
+            <Route path="/profile/view" element={<ProfileView />} />
+            <Route path="/profile/edit" element={<ProfileEdit />} />
+            
+          </Route>
+        </Routes>
+      </Layout>
       <Footer />
     </div>
   );

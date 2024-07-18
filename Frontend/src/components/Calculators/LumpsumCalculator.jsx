@@ -78,38 +78,35 @@ export default function LumpsumCalculator() {
           <div className="w-full md:w-1/3 p-2">
             <label className="block text-gray-700 mb-2">I want to invest monthly (₹)</label>
             <input
-              type="range"
+              type="number"
               min="1000"
               max="100000"
               value={monthlyInvestment}
               onChange={(e) => setMonthlyInvestment(Number(e.target.value))}
-              className="w-full"
+              className="w-full p-2 border border-gray-300 rounded-md"
             />
-            <span className="block text-center mt-2">{`₹ ${monthlyInvestment}`}</span>
           </div>
           <div className="w-full md:w-1/3 p-2">
             <label className="block text-gray-700 mb-2">For a period of (years)</label>
             <input
-              type="range"
+              type="number"
               min="1"
               max="30"
               value={years}
               onChange={(e) => setYears(Number(e.target.value))}
-              className="w-full"
+              className="w-full p-2 border border-gray-300 rounded-md"
             />
-            <span className="block text-center mt-2">{years} Years</span>
           </div>
           <div className="w-full md:w-1/3 p-2">
             <label className="block text-gray-700 mb-2">Expected Growth Rate (%)</label>
             <input
-              type="range"
+              type="number"
               min="1"
               max="30"
               value={growthRate}
               onChange={(e) => setGrowthRate(Number(e.target.value))}
-              className="w-full"
+              className="w-full p-2 border border-gray-300 rounded-md"
             />
-            <span className="block text-center mt-2">{growthRate} %</span>
           </div>
         </div>
         <div className="flex flex-col items-center mb-5">

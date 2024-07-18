@@ -44,7 +44,6 @@ export default function SipCalculator() {
         label: 'Invested Amount',
         data: investmentPortion,
         backgroundColor: 'rgba(54, 162, 235, 0.6)',
-        
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
       },
@@ -79,38 +78,35 @@ export default function SipCalculator() {
           <div className="w-full md:w-1/3 p-2">
             <label className="block text-gray-700 mb-2">Monthly SIP Amount (₹)</label>
             <input
-              type="range"
+              type="number"
               min="1000"
               max="100000"
               value={sipAmount}
               onChange={(e) => setSipAmount(Number(e.target.value))}
-              className="w-full"
+              className="w-full p-2 border border-gray-300 rounded-md"
             />
-            <span className="block text-center mt-2">{`₹ ${sipAmount}`}</span>
           </div>
           <div className="w-full md:w-1/3 p-2">
             <label className="block text-gray-700 mb-2">Number of Years</label>
             <input
-              type="range"
+              type="number"
               min="1"
               max="30"
               value={years}
               onChange={(e) => setYears(Number(e.target.value))}
-              className="w-full"
+              className="w-full p-2 border border-gray-300 rounded-md"
             />
-            <span className="block text-center text-lg mt-2">{years} Years</span>
           </div>
           <div className="w-full md:w-1/3 p-2">
             <label className="block text-gray-700 mb-2">Expected Annual Return (%)</label>
             <input
-              type="range"
+              type="number"
               min="1"
               max="30"
               value={expectedRate}
               onChange={(e) => setExpectedRate(Number(e.target.value))}
-              className="w-full"
+              className="w-full p-2 border border-gray-300 rounded-md"
             />
-            <span className="block text-center text-lg mt-2">{expectedRate} %</span>
           </div>
         </div>
         <div className="flex flex-col items-center mb-5">
