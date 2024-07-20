@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faTwitter, faYoutube, faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faYoutube, faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import twitterLogo from '../assets/images/logo-black.png'; // Import the local Twitter logo
 
 const SocialMediaSidebar = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -34,7 +35,7 @@ const SocialMediaSidebar = () => {
           </li>
           <li>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="block text-center text-gray-800 hover:text-blue-500">
-              <FontAwesomeIcon icon={faTwitter} size="2x" />
+              <img src={twitterLogo} alt="Twitter" className="w-8 h-8 mx-auto" />
             </a>
           </li>
           <li>

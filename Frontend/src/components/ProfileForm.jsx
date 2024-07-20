@@ -17,7 +17,8 @@ export default function ProfileForm() {
     portfolioSize: '',
     investmentOptions: [],
     investmentDuration: '',
-    riskTolerance: ''
+    riskTolerance: '',
+    incomeSlab: ''
   });
 
   useEffect(() => {
@@ -25,13 +26,19 @@ export default function ProfileForm() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token') // Ensure Bearer is included
+        'Authorization': localStorage.getItem('token')
       }
     })
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        setFormData(data.profile);
+        const profileData = {
+          ...data.profile,
+          wouldInvest: data.profile.wouldInvest === 'yes' ? 'yes' : 'no',
+          usedBuyNowPayLater: data.profile.usedBuyNowPayLater === 'yes' ? 'yes' : 'no',
+          currentlyInvested: data.profile.currentlyInvested === 'yes' ? 'yes' : 'no'
+        };
+        setFormData(profileData);
       }
     });
   }, [dispatch]);
@@ -51,11 +58,12 @@ export default function ProfileForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Submitting form data:', formData); // Logging form data before submit
     fetch('https://fincelerate.onrender.com/server/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token') // Ensure Bearer is included
+        'Authorization': localStorage.getItem('token')
       },
       body: JSON.stringify(formData)
     })
@@ -69,7 +77,7 @@ export default function ProfileForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4 bg-white shadow-lg rounded-lg">
+    <div className="container mx-auto p-4 bg-white shadow-lg rounded-lg max-w-2xl">
       <h2 className="text-3xl font-bold mb-6 text-center">{formData._id ? 'Edit Profile' : 'Create Profile'}</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="flex flex-col">
@@ -251,6 +259,22 @@ export default function ProfileForm() {
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col">
+          <label className="mb-2 font-medium text-gray-700">Income Slab</label>
+          <select
+            name="incomeSlab"
+            value={formData.incomeSlab}
+            onChange={handleChange}
+            className="form-select p-2 border border-gray-300 rounded-md"
+          >
+            <option value="">Select Income Slab</option>
+            <option value="1-5">1-5 Lakh</option>
+            <option value="5-10">5-10 Lakh</option>
+            <option value="10-20">10-20 Lakh</option>
+            <option value="20plus">20+ Lakh</option>
           </select>
         </div>
 

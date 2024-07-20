@@ -10,7 +10,6 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,7 +64,7 @@ export default function Header() {
           </Link>
         </div>
         <button
-          className="md:hidden flex items-center text-gray-900 "
+          className="md:hidden flex items-center text-gray-900"
           onClick={toggleMenu}
         >
           {isOpen ? (
@@ -82,7 +81,6 @@ export default function Header() {
           className={`${isOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row items-center text-base justify-center absolute md:static top-full right-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none`}
         >
           <Link to="/about" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu}>About Us</Link>
-          
           <div className="relative">
             <button
               className="py-2 px-2 w-full text-center md:py-0 md:px-3 flex items-center justify-between"
@@ -135,33 +133,8 @@ export default function Header() {
           </div>
           <Link to="/eyourself" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>E Yourself</Link>
           <Link to="/contactus" className="py-2 px-2 w-full text-center md:py-0 md:px-3" onClick={closeMenu} style={{ whiteSpace: 'nowrap' }}>Contact Us</Link>
-          {isMobile && isAuthenticated && (
-            <>
-              <button
-                onClick={handleProfileClick}
-                className="py-2 px-2 w-full text-center md:py-0 md:px-3 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-              >
-                Profile
-              </button>
-              <button
-                onClick={handleLogout}
-                className="py-2 px-2 w-full text-center md:py-0 md:px-3 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-              >
-                Signout
-              </button>
-            </>
-          )}
-          {!isAuthenticated && (
-            <Link
-              to="/signin"
-              className="py-2 px-2 w-full text-center md:py-0 md:px-3 bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-              onClick={closeMenu}
-            >
-              Signin
-            </Link>
-          )}
         </nav>
-        {isAuthenticated && !isMobile && (
+        {isAuthenticated ? (
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={handleProfileClick}
@@ -187,8 +160,41 @@ export default function Header() {
               </svg>
             </button>
           </div>
+        ) : (
+          <Link
+            to="/signin"
+            className="hidden md:flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+            onClick={closeMenu}
+          >
+            Signin
+          </Link>
         )}
       </div>
+      {isMobile && isAuthenticated && (
+        <div className="flex flex-col items-center">
+          <button
+            onClick={handleProfileClick}
+            className="py-2 px-2 w-full text-center bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+          >
+            Profile
+          </button>
+          <button
+            onClick={handleLogout}
+            className="py-2 px-2 w-full text-center bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+          >
+            Signout
+          </button>
+        </div>
+      )}
+      {!isAuthenticated && isMobile && (
+        <Link
+          to="/signin"
+          className="py-2 px-2 w-full text-center bg-gray-100 border-0 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+          onClick={closeMenu}
+        >
+          Signin
+        </Link>
+      )}
     </header>
   );
 }

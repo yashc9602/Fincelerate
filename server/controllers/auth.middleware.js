@@ -13,6 +13,7 @@ const verifyAuth = (req, res, next) => {
     }
 
     req.userId = decoded.userId;
+    console.log('Decoded userId:', req.userId); // Logging userId
     next();
   });
 };

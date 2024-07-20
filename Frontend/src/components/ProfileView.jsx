@@ -37,7 +37,7 @@ const ProfileView = () => {
       <div className="bg-white shadow-lg rounded-lg p-6 space-y-6">
         <div className="flex flex-col space-y-2">
           <h3 className="text-xl font-semibold text-gray-700">Investment Preference</h3>
-          <p className="text-lg text-gray-600">{profile.wouldInvest === 'yes' ? 'Yes' : 'No'}</p>
+          <p className="text-lg text-gray-600">{profile.wouldInvest ? 'Yes' : 'No'}</p>
         </div>
         <div className="flex flex-col space-y-2">
           <h3 className="text-xl font-semibold text-gray-700">Yearly Income</h3>
@@ -49,11 +49,11 @@ const ProfileView = () => {
         </div>
         <div className="flex flex-col space-y-2">
           <h3 className="text-xl font-semibold text-gray-700">Used Buy Now Pay Later</h3>
-          <p className="text-lg text-gray-600">{profile.usedBuyNowPayLater === 'yes' ? 'Yes' : 'No'}</p>
+          <p className="text-lg text-gray-600">{profile.usedBuyNowPayLater ? 'Yes' : 'No'}</p>
         </div>
         <div className="flex flex-col space-y-2">
           <h3 className="text-xl font-semibold text-gray-700">Currently Invested</h3>
-          <p className="text-lg text-gray-600">{profile.currentlyInvested === 'yes' ? 'Yes' : 'No'}</p>
+          <p className="text-lg text-gray-600">{profile.currentlyInvested ? 'Yes' : 'No'}</p>
         </div>
         <div className="flex flex-col space-y-2">
           <h3 className="text-xl font-semibold text-gray-700">Current Portfolio Size</h3>
@@ -69,11 +69,15 @@ const ProfileView = () => {
         </div>
         <div className="flex flex-col space-y-2">
           <h3 className="text-xl font-semibold text-gray-700">Investment Duration</h3>
-          <p className="text-lg text-gray-600">{profile.investmentDuration} years</p>
+          <p className="text-lg text-gray-600">{profile.investmentDuration === '5plus' ? '5+ years' : `${profile.investmentDuration} years`}</p>
         </div>
         <div className="flex flex-col space-y-2">
           <h3 className="text-xl font-semibold text-gray-700">Risk Tolerance</h3>
           <p className="text-lg text-gray-600">{profile.riskTolerance}</p>
+        </div>
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xl font-semibold text-gray-700">Income Slab</h3>
+          <p className="text-lg text-gray-600">{profile.incomeSlab}</p>
         </div>
         <div className="flex justify-center">
           <button

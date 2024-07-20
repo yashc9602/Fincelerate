@@ -17,7 +17,8 @@ export default function ProfileEdit() {
     portfolioSize: '',
     investmentOptions: [],
     investmentDuration: '',
-    riskTolerance: ''
+    riskTolerance: '',
+    incomeSlab: '' // Ensure incomeSlab is included
   });
 
   useEffect(() => {
@@ -31,7 +32,14 @@ export default function ProfileEdit() {
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        setFormData(data.profile);
+        // Convert boolean values to "yes" or "no"
+        const profileData = {
+          ...data.profile,
+          wouldInvest: data.profile.wouldInvest === 'yes' ? 'yes' : 'no',
+          usedBuyNowPayLater: data.profile.usedBuyNowPayLater === 'yes' ? 'yes' : 'no',
+          currentlyInvested: data.profile.currentlyInvested === 'yes' ? 'yes' : 'no'
+        };
+        setFormData(profileData);
       }
     });
   }, [dispatch]);
@@ -51,13 +59,19 @@ export default function ProfileEdit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const submitData = {
+      ...formData,
+      wouldInvest: formData.wouldInvest === 'yes' ? 'yes' : 'no',
+      usedBuyNowPayLater: formData.usedBuyNowPayLater === 'yes' ? 'yes' : 'no',
+      currentlyInvested: formData.currentlyInvested === 'yes' ? 'yes' : 'no'
+    };
     fetch('https://fincelerate.onrender.com/server/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(submitData)
     })
     .then(response => response.json())
     .then(data => {
@@ -251,6 +265,22 @@ export default function ProfileEdit() {
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col">
+          <label className="mb-2 text-lg font-medium text-gray-700">Income Slab</label>
+          <select
+            name="incomeSlab"
+            value={formData.incomeSlab}
+            onChange={handleChange}
+            className="form-select p-2 border rounded-lg text-lg"
+          >
+            <option value="">Select Income Slab</option>
+            <option value="1-5">1-5 Lakh</option>
+            <option value="5-10">5-10 Lakh</option>
+            <option value="10-20">10-20 Lakh</option>
+            <option value="20plus">20+ Lakh</option>
           </select>
         </div>
 
