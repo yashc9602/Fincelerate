@@ -114,7 +114,7 @@ export default function Footer() {
           </div>
 
           <div className="border-t py-8 text-center text-sm text-gray-400">
-            <p className="mt-4">Mutual Fund distributor with AMFI Registration number ARN: 189716</p>
+            <p className="mt-4">Mutual Fund distributor with AMFI Registration number ARN-302467</p>
             <p className="mt-4">Fincelerate Private Limited CIN number: U66301KA2023PTC175585</p>
             <p className="mt-4">Registered Office: 259, 14th Main, 27th Cross, Banashankari 2nd stage, Bengaluru, Karnataka 560070</p>
           </div>
